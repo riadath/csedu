@@ -1,0 +1,54 @@
+import 'package:flutter/material.dart';
+import 'package:csedu/Constants.dart';
+
+class RoundedInputField extends StatelessWidget {
+  final String hintText;
+  final IconData icon;
+  final ValueChanged<String> onChagned;
+  const RoundedInputField({
+    Key? key,
+    required this.hintText,
+    required this.icon,
+    required this.onChagned,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFieldContainer(
+      child: TextField(
+        onChanged: onChagned,
+        decoration: InputDecoration(
+          icon: Icon(
+            icon,
+            color: gPrimaryColor,
+          ),
+          hintText: hintText,
+          border: InputBorder.none,
+        ),
+      ),
+    );
+  }
+}
+
+class TextFieldContainer extends StatelessWidget {
+  final Widget child;
+  const TextFieldContainer({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      width: screenSize.width * .8,
+      decoration: BoxDecoration(
+        color: gPrimaryColorLight,
+        borderRadius: BorderRadius.circular(29),
+      ),
+      child: child,
+    );
+  }
+}

@@ -1,10 +1,6 @@
+import 'package:csedu/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:csedu/Screens/Welcome/welcomeScreen.dart';
-
-const gPrimaryColor = Color.fromARGB(255, 207, 197, 48);
-const gPrimaryColorLight = Color(0xFFF1E6FF);
-
-const double defaultPadding = 16.0;
 
 void main() {
   runApp(const MyApp());

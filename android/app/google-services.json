@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "514013739610",
+    "project_id": "csedu-project",
+    "storage_bucket": "csedu-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514013739610:android:7f3d0cad41e81aaeeb3663",
+        "android_client_info": {
+          "package_name": "com.example.csedu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "514013739610-oqt9bl58dfs44h9pru74sljl5781ngjh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB90gD2DcVFMibvinE56lfSXvJbvrcCZkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "514013739610-oqt9bl58dfs44h9pru74sljl5781ngjh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
