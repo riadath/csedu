@@ -1,4 +1,4 @@
-import 'package:csedu/Screens/Signup/SignupScreen.dart';
+import 'package:csedu/Screens/Home/HomeScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:csedu/Screens/Login/LoginWidget.dart';
@@ -14,7 +14,7 @@ class LoginScreen extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return SignupScreen();
+              return HomeScreen();
             } else
               return LoginWidget();
           }),

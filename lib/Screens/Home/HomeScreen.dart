@@ -1,16 +1,9 @@
 import 'package:csedu/Constants.dart';
+import 'package:csedu/Screens/Home/HomeWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:csedu/Screens/Welcome/welcomeScreen.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +15,7 @@ class MyApp extends StatelessWidget {
         primaryColorDark: Colors.grey[850],
         scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
-      home: WelcomeScreen(),
+      home: HomeWidget(),
     );
   }
 }
