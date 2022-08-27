@@ -1,4 +1,4 @@
-import 'package:csedu/Constants.dart';
+import 'package:csedu/constants.dart';
 import 'package:flutter/material.dart';
 
 class RoundedButton extends StatelessWidget {
@@ -21,14 +21,12 @@ class RoundedButton extends StatelessWidget {
       height: screenSize.height * 0.05,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(23),
-        child: Container(
-          child: TextButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(gPrimaryColor),
-            ),
-            onPressed: onPress,
-            child: Text(buttonText, style: TextStyle(color: textColor)),
+        child: TextButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(gPrimaryColor),
           ),
+          onPressed: onPress,
+          child: Text(buttonText, style: TextStyle(color: textColor)),
         ),
       ),
     );
