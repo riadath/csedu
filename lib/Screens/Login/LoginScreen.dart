@@ -20,14 +20,16 @@ class Background extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // Positioned(
-          //   top: 0,
-          //   left: 0,
-          //   child: Image.asset(
-          //     'images/main_top.png',
-          //     width: screenSize.width * .4,
-          //   ),
-          // ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            // height: 100,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.fitHeight,
+                image: AssetImage('images/vectorWave3.jpg'),
+              ),
+            ),
+          ),
           TweenAnimationBuilder<double>(
             tween: Tween<double>(begin: 0.1, end: .94),
             duration: Duration(milliseconds: 400),
