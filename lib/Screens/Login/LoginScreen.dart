@@ -5,6 +5,7 @@ import 'package:csedu/constants.dart';
 import 'package:csedu/RoundedButton.dart';
 import '../../RoundedInputField.dart';
 import '../../RoundedPasswordField.dart';
+import '../../auth.dart';
 import '../Signup/SignupScreen.dart';
 
 class Background extends StatelessWidget {
@@ -52,8 +53,10 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
+  final AuthService _auth = AuthService();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  String errorMessage = '';
   @override
   void dispose() {
     emailController.dispose();
@@ -75,6 +78,10 @@ class _LoginWidgetState extends State<LoginWidget> {
           SizedBox(
             height: screenSize.height * 0.02,
           ),
+          Text(errorMessage,
+              style: const TextStyle(
+                color: Colors.red,
+              )),
           RoundedInputField(
             controller: emailController,
             hintText: 'Email',
@@ -87,7 +94,18 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
           RoundedButton(
             buttonText: 'Login',
-            onPress: signIn,
+            onPress: () {
+              setState(() {
+                if (emailController.text.isEmpty ||
+                    passwordController.text.isEmpty) {
+                  errorMessage = 'Enter Email and Password';
+                } else {
+                  errorMessage = '';
+                  _auth.signIn(emailController.text.trim(),
+                      passwordController.text.trim());
+                }
+              });
+            },
             textColor: gPrimaryColorDark,
           ),
           Row(
@@ -117,13 +135,6 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
         ],
       ),
-    );
-  }
-
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text.trim(),
-      password: passwordController.text.trim(),
     );
   }
 }

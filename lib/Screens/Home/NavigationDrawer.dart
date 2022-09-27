@@ -9,8 +9,6 @@ class NavigationDrawer extends StatefulWidget {
 }
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
-
-  
   Widget buildNavbarItems({
     required IconData icon,
     required String text,
@@ -37,7 +35,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         padding: EdgeInsets.only(left: 30, top: 40),
         children: [
           // const SizedBox(height: 50),
-          buildNavbarItems(icon: Icons.person, text: "Profile", onTap: () {}),
+          buildNavbarItems(
+              icon: Icons.person, text: "Add Your Profile", onTap: () {}),
           buildNavbarItems(
               icon: Icons.notifications, text: "Notifications", onTap: () {}),
           buildNavbarItems(
