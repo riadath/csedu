@@ -1,8 +1,8 @@
-import 'package:csedu/RoundedButton.dart';
-import 'package:csedu/RoundedInputField.dart';
-import 'package:csedu/RoundedPasswordField.dart';
-import 'package:csedu/Screens/Home/HomeScreen.dart';
-import 'package:csedu/Screens/Login/LoginScreen.dart';
+import 'package:csedu/rounded_button.dart';
+import 'package:csedu/rounded_input_field.dart';
+import 'package:csedu/rounded_password_field.dart';
+import 'package:csedu/Screens/Home/home_screen.dart';
+import 'package:csedu/Screens/Login/login_screen.dart';
 import 'package:csedu/auth.dart';
 import 'package:csedu/constants.dart';
 import 'package:flutter/material.dart';

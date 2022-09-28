@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../Home/HomeScreen.dart';
-import 'package:csedu/Screens/Login/LoginScreen.dart';
-import 'package:csedu/Screens/Signup/SignupScreen.dart';
-import '../../RoundedButton.dart';
+import '../Home/home_screen.dart';
+import 'package:csedu/Screens/Login/login_screen.dart';
+import 'package:csedu/Screens/Signup/signup_screen.dart';
+import '../../rounded_button.dart';
 
 class WelcomeWidget extends StatefulWidget {
   const WelcomeWidget({Key? key}) : super(key: key);

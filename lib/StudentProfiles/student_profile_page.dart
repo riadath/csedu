@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csedu/constants.dart';
+import 'package:csedu/user_model.dart';
 import 'package:flutter/material.dart';
 
 class StudentProfilePage extends StatefulWidget {
@@ -24,7 +25,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
         appBar: AppBar(
           title: const Text('Student List'),
         ),
-        body: StreamBuilder<List<User>>(
+        body: StreamBuilder<List<UserModel>>(
           stream: readUsers(),
           builder: ((context, snapshot) {
             final users = snapshot.data;
@@ -45,13 +46,13 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
     );
   }
 
-  Stream<List<User>> readUsers() {
+  Stream<List<UserModel>> readUsers() {
     return FirebaseFirestore.instance.collection('users').snapshots().map(
         (snapshot) =>
-            snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
+            snapshot.docs.map((doc) => UserModel.fromJson(doc.data())).toList());
   }
 
-  Widget buildUser(User user) => Card(
+  Widget buildUser(UserModel user) => Card(
         margin: const EdgeInsets.all(5),
         shadowColor: Colors.lime,
         color: Colors.grey[300],
@@ -64,29 +65,3 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
       );
 }
 
-class User {
-  final String name;
-  final int batch;
-  final String bloodGroup;
-  final String linkedin;
-
-  User({
-    required this.name,
-    required this.batch,
-    required this.linkedin,
-    required this.bloodGroup,
-  });
-
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'batch': batch,
-        'linkedin': linkedin,
-        'bloodGroup': bloodGroup,
-      };
-  static User fromJson(Map<String, dynamic> json) => User(
-        name: json['name'],
-        batch: json['batch'],
-        linkedin: json['linkedin'],
-        bloodGroup: json['bloodGroup'],
-      );
-}

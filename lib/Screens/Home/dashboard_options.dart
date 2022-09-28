@@ -1,4 +1,4 @@
-import 'package:csedu/StudentProfiles/StudentProfilePage.dart';
+import 'package:csedu/StudentProfiles/student_profile_page.dart';
 import 'package:flutter/material.dart';
 
 class DashboardOptions extends StatelessWidget {

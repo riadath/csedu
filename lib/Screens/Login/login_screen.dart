@@ -1,12 +1,12 @@
-import 'package:csedu/Screens/Home/HomeScreen.dart';
+import 'package:csedu/Screens/Home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:csedu/constants.dart';
-import 'package:csedu/RoundedButton.dart';
-import '../../RoundedInputField.dart';
-import '../../RoundedPasswordField.dart';
+import 'package:csedu/rounded_button.dart';
+import '../../rounded_input_field.dart';
+import '../../rounded_password_field.dart';
 import '../../auth.dart';
-import '../Signup/SignupScreen.dart';
+import '../Signup/signup_screen.dart';
 
 class Background extends StatelessWidget {
   final Widget child;

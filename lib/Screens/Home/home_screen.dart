@@ -1,8 +1,8 @@
 import 'package:csedu/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'DashboardOptions.dart';
-import 'NavigationDrawer.dart';
+import 'dashboard_options.dart';
+import 'navigation_drawer.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
