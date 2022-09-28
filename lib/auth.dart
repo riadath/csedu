@@ -1,3 +1,4 @@
+import 'package:csedu/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:csedu/user_model.dart';
 
@@ -19,12 +20,13 @@ class AuthService {
     }
   }
 
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future registerWithEmailAndPassword(String email, String password,String name) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
-      return _userFromFirebaseUser(user!);
+      await DatabaseService(uid: user!.uid).updateUserData(name,'',0);
+      return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());
       return null;
