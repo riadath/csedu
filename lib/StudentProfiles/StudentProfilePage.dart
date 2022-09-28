@@ -45,11 +45,11 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
     );
   }
 
-  Stream<List<User>> readUsers() => FirebaseFirestore.instance
-      .collection('users')
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
+  Stream<List<User>> readUsers() {
+    return FirebaseFirestore.instance.collection('users').snapshots().map(
+        (snapshot) =>
+            snapshot.docs.map((doc) => User.fromJson(doc.data())).toList());
+  }
 
   Widget buildUser(User user) => Card(
         margin: const EdgeInsets.all(5),
@@ -59,38 +59,34 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
           leading: CircleAvatar(child: Text('${user.batch}')),
           title: Text(user.name),
           onTap: () {},
-          // subtitle: Text(user.linkedin_profile),
+          // subtitle: Text(user.linkedin),
         ),
       );
 }
 
 class User {
-  // String id = '';
   final String name;
   final int batch;
-  final String blood_group;
-  final String linkedin_profile;
+  final String bloodGroup;
+  final String linkedin;
 
   User({
-    // this.id = '',
     required this.name,
     required this.batch,
-    required this.linkedin_profile,
-    required this.blood_group,
+    required this.linkedin,
+    required this.bloodGroup,
   });
 
   Map<String, dynamic> toJson() => {
-        // 'id': id,
         'name': name,
         'batch': batch,
-        'linkedin_profile': linkedin_profile,
-        'blood_group': blood_group,
+        'linkedin': linkedin,
+        'bloodGroup': bloodGroup,
       };
   static User fromJson(Map<String, dynamic> json) => User(
-        // id: json['id'],
         name: json['name'],
         batch: json['batch'],
-        linkedin_profile: json['linkedin_profile'],
-        blood_group: json['blood_group'],
+        linkedin: json['linkedin'],
+        bloodGroup: json['bloodGroup'],
       );
 }

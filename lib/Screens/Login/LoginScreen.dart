@@ -31,14 +31,14 @@ class Background extends StatelessWidget {
               ),
             ),
           ),
-          TweenAnimationBuilder<double>(
-            tween: Tween<double>(begin: 0.1, end: .94),
-            duration: Duration(milliseconds: 400),
-            builder: (context, scale, child) {
-              return Transform.scale(scale: scale, child: child);
-            },
-            child: child,
-          ),
+          // TweenAnimationBuilder<double>(
+          //   tween: Tween<double>(begin: 0.1, end: .94),
+          //   duration: Duration(milliseconds: 200),
+          //   builder: (context, scale, child) {
+          //     return Transform.scale(scale: scale, child: child);
+          //   },
+          child,
+          // ),
         ],
       ),
     );
