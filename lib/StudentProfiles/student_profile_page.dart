@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:csedu/constants.dart';
+import 'package:csedu/Constants.dart';
 import 'package:csedu/user_model.dart';
 import 'package:flutter/material.dart';
 
