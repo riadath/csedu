@@ -6,13 +6,13 @@ import 'package:flutter/services.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); 
+  await Firebase.initializeApp();
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((value) => runApp(MyApp()));
-  
+
   runApp(MyApp());
 }
 
@@ -33,4 +33,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-  

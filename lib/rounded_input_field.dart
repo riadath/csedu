@@ -17,7 +17,7 @@ class RoundedInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         onChanged: onChagned,
         decoration: InputDecoration(

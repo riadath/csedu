@@ -49,7 +49,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
   Stream<List<UserModel>> readUsers() {
     return FirebaseFirestore.instance
         .collection('users')
-        .where('showData', isEqualTo: false)
+        .where('showData', isEqualTo: true)
         .orderBy('name')
         .snapshots()
         .map((snapshot) => snapshot.docs
