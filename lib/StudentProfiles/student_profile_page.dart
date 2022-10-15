@@ -47,9 +47,14 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
   }
 
   Stream<List<UserModel>> readUsers() {
-    return FirebaseFirestore.instance.collection('users').snapshots().map(
-        (snapshot) =>
-            snapshot.docs.map((doc) => UserModel.fromJson(doc.data())).toList());
+    return FirebaseFirestore.instance
+        .collection('users')
+        .where('showData', isEqualTo: false)
+        .orderBy('name')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => UserModel.fromJson(doc.data()))
+            .toList());
   }
 
   Widget buildUser(UserModel user) => Card(
@@ -64,4 +69,3 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
         ),
       );
 }
-
