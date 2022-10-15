@@ -4,7 +4,7 @@ import 'package:csedu/rounded_password_field.dart';
 import 'package:csedu/Screens/Home/home_screen.dart';
 import 'package:csedu/Screens/Login/login_screen.dart';
 import 'package:csedu/auth.dart';
-import 'package:csedu/constants.dart';
+import 'package:csedu/Constants.dart';
 import 'package:flutter/material.dart';
 
 class Background extends StatelessWidget {
