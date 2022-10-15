@@ -32,9 +32,6 @@ class _RoutineWidgetIndState extends State<RoutineWidget> {
             ),
           ),
         ],
-        bottom: TabBar(
-          tabs: [],
-         
       ),
 
       body: const Center(
