@@ -1,6 +1,8 @@
 import 'package:csedu/StudentProfiles/student_profile_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../StudyMaterials/study_materials_page.dart';
+
 class DashboardOptions extends StatelessWidget {
   const DashboardOptions({
     Key? key,
@@ -46,7 +48,13 @@ class DashboardOptions extends StatelessWidget {
             screenSize: screenSize,
             imageUrl: 'images/study_materials.png',
             title: 'Study Materials',
-            onPress: () {},
+            onPress: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Study_Material_Home(),
+                  ));
+            },
           ),
         ],
       ),
