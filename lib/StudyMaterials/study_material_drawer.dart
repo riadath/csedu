@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:csedu/StudyMaterials/study_materials_tab_view.dart';
 
+import '../Constants.dart';
+
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
 
@@ -12,7 +14,7 @@ class MainDrawer extends StatelessWidget {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(27),
-            color: Colors.red[600],
+            color: gPrimaryColor,
             child: const Center(
               child: Text(
                 'Semesters',
@@ -27,10 +29,12 @@ class MainDrawer extends StatelessWidget {
             leading : Icon( Icons.school ),
             title: Text('1-1', style : TextStyle(fontSize : 18)),
             onTap : () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StudyMaterialTabView(),
+                    builder: (context) => StudyMaterialTabView(0),
                   ));
             },
           ),
@@ -38,10 +42,12 @@ class MainDrawer extends StatelessWidget {
             leading : Icon( Icons.school ),
             title: Text('1-2', style : TextStyle(fontSize : 18)),
             onTap : () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StudyMaterialTabView(),
+                    builder: (context) => StudyMaterialTabView(1),
                   ));
             },
           ),
@@ -49,10 +55,12 @@ class MainDrawer extends StatelessWidget {
             leading : Icon( Icons.school ),
             title: Text('2-1', style : TextStyle(fontSize : 18)),
              onTap : () {
+               Navigator.of(context).pop();
+               Navigator.of(context).pop();
                Navigator.push(
                    context,
                    MaterialPageRoute(
-                     builder: (context) => StudyMaterialTabView(),
+                     builder: (context) => StudyMaterialTabView(2),
                    ));
              },
           ),
@@ -60,10 +68,12 @@ class MainDrawer extends StatelessWidget {
             leading : Icon( Icons.school ),
             title: Text('2-2', style : TextStyle(fontSize : 18)),
             onTap : () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StudyMaterialTabView(),
+                    builder: (context) => StudyMaterialTabView(3),
                   ));
             },
           ),
@@ -71,10 +81,12 @@ class MainDrawer extends StatelessWidget {
             leading : Icon( Icons.school ),
             title: Text('3-1', style : TextStyle(fontSize : 18)),
             onTap : () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StudyMaterialTabView(),
+                    builder: (context) => StudyMaterialTabView(4),
                   ));
             },
           ),
@@ -82,10 +94,12 @@ class MainDrawer extends StatelessWidget {
             leading : Icon( Icons.school ),
             title: Text('3-2', style : TextStyle(fontSize : 18)),
             onTap : () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StudyMaterialTabView(),
+                    builder: (context) => StudyMaterialTabView(5),
                   ));
             },
           ),
@@ -93,10 +107,12 @@ class MainDrawer extends StatelessWidget {
             leading : Icon( Icons.school ),
             title: Text('4-1', style : TextStyle(fontSize : 18)),
             onTap : () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StudyMaterialTabView(),
+                    builder: (context) => StudyMaterialTabView(6),
                   ));
             },
           ),
@@ -104,10 +120,12 @@ class MainDrawer extends StatelessWidget {
             leading : Icon( Icons.school ),
             title: Text('4-2', style : TextStyle(fontSize : 18)),
             onTap : () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StudyMaterialTabView(),
+                    builder: (context) => StudyMaterialTabView(7),
                   ));
             },
           ),

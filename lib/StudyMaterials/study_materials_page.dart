@@ -1,3 +1,4 @@
+import 'package:csedu/Constants.dart';
 import 'package:csedu/StudyMaterials/study_material_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ class Study_Material_Home extends StatelessWidget {
       appBar: AppBar(
         title: Text('Study Materials'),
         centerTitle: true,
-        backgroundColor: Colors.red[800],
+        backgroundColor: gPrimaryColor,
       ),
       drawer: MainDrawer(),
       body: Center(
