@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:csedu/StudyMaterials/study_materials_tab_view.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -22,45 +23,93 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
           ),
-          const ListTile(
+          ListTile(
             leading : Icon( Icons.school ),
             title: Text('1-1', style : TextStyle(fontSize : 18)),
-            onTap : null,
+            onTap : () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StudyMaterialTabView(),
+                  ));
+            },
           ),
-          const ListTile(
+          ListTile(
             leading : Icon( Icons.school ),
             title: Text('1-2', style : TextStyle(fontSize : 18)),
-            onTap : null,
+            onTap : () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StudyMaterialTabView(),
+                  ));
+            },
           ),
-          const ListTile(
+           ListTile(
             leading : Icon( Icons.school ),
             title: Text('2-1', style : TextStyle(fontSize : 18)),
-            onTap : null,
+             onTap : () {
+               Navigator.push(
+                   context,
+                   MaterialPageRoute(
+                     builder: (context) => StudyMaterialTabView(),
+                   ));
+             },
           ),
-          const ListTile(
+          ListTile(
             leading : Icon( Icons.school ),
             title: Text('2-2', style : TextStyle(fontSize : 18)),
-            onTap : null,
+            onTap : () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StudyMaterialTabView(),
+                  ));
+            },
           ),
-          const ListTile(
+          ListTile(
             leading : Icon( Icons.school ),
             title: Text('3-1', style : TextStyle(fontSize : 18)),
-            onTap : null,
+            onTap : () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StudyMaterialTabView(),
+                  ));
+            },
           ),
-          const ListTile(
+          ListTile(
             leading : Icon( Icons.school ),
             title: Text('3-2', style : TextStyle(fontSize : 18)),
-            onTap : null,
+            onTap : () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StudyMaterialTabView(),
+                  ));
+            },
           ),
-          const ListTile(
+          ListTile(
             leading : Icon( Icons.school ),
             title: Text('4-1', style : TextStyle(fontSize : 18)),
-            onTap : null,
+            onTap : () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StudyMaterialTabView(),
+                  ));
+            },
           ),
-          const ListTile(
+          ListTile(
             leading : Icon( Icons.school ),
             title: Text('4-2', style : TextStyle(fontSize : 18)),
-            onTap : null,
+            onTap : () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StudyMaterialTabView(),
+                  ));
+            },
           ),
         ],
       ),
