@@ -10,9 +10,12 @@ class RoutineInd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Image.asset('images/routine_26.png'),
+    return Column(
+      children: <Widget>[
+        SizedBox(height: screenSize.height * 0.14,),
+
+        Image.asset('images/routine_26.png'),
+      ]
     );
   }
 }
