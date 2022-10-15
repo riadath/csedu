@@ -1,3 +1,4 @@
+import 'package:csedu/Screens/Routine/RountineIndividual/Routine_Ind.dart';
 import 'package:csedu/Screens/Routine/Routine_screen.dart';
 import 'package:csedu/Constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,12 +7,12 @@ import 'navigation_drawer.dart';
 
 class RoutineWidget extends StatefulWidget {
   const RoutineWidget({Key? key}) : super(key: key);
-
+  
   @override
-  State<RoutineWidget> createState() => _RoutineWidgetState();
+  State<RoutineWidget> createState() => _RoutineWidgetIndState();
 }
 
-class _RoutineWidgetState extends State<RoutineWidget> {
+class _RoutineWidgetIndState extends State<RoutineWidget> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -31,7 +32,11 @@ class _RoutineWidgetState extends State<RoutineWidget> {
             ),
           ),
         ],
+        bottom: TabBar(
+          tabs: [],
+         
       ),
+
       body: const Center(
         child: Background(
           child: RoutinesAllBatch(),

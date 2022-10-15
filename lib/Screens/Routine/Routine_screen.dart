@@ -1,4 +1,5 @@
 import 'package:csedu/Screens/Routine/RountineIndividual/Routine_Ind.dart';
+import 'package:csedu/Screens/Routine/RountineIndividual/Routine_pageInd.dart';
 import 'package:csedu/StudentProfiles/student_profile_page.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class RoutinesAllBatch extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const StudentProfilePage(),
+                    builder: (context) =>  RoutineWidgetInd(name: '27', url: 'images/routine_26.png',),
                   ));
             },
           ),
@@ -37,22 +38,35 @@ class RoutinesAllBatch extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>  RoutineInd(name: '26', url: 'images/routine_26.png'),
+                    builder: (context) =>  RoutineWidgetInd(name: '26', url: 'images/routine_26.png',),
                   ));
             },
           ),
           CardCreator(
             screenSize: screenSize,
             title: '25',
-            onPress: () {},
+            onPress: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  RoutineWidgetInd(name: '25', url: 'images/routine_26.png',),
+                  ));
+            },
           ),
           CardCreator(
             screenSize: screenSize,
             title: '24',
-            onPress: () {},
+            onPress: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  RoutineWidgetInd(name: '24', url: 'images/routine_26.png',),
+                  ));
+            },
           ),
         ],
       ),
+
     );
   }
 }

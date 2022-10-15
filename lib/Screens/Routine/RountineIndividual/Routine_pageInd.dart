@@ -1,17 +1,20 @@
+import 'package:csedu/Screens/Routine/RountineIndividual/Routine_Ind.dart';
 import 'package:csedu/Screens/Routine/Routine_screen.dart';
 import 'package:csedu/Constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'navigation_drawer.dart';
 
-class RoutineWidget extends StatefulWidget {
-  const RoutineWidget({Key? key}) : super(key: key);
+class RoutineWidgetInd extends StatefulWidget {
+  String name;
+  String url;
+  RoutineWidgetInd({super.key, required this.name, required this.url});
 
   @override
-  State<RoutineWidget> createState() => _RoutineWidgetState();
+  State<RoutineWidgetInd> createState() => _RoutineWidgetIndState();
 }
 
-class _RoutineWidgetState extends State<RoutineWidget> {
+class _RoutineWidgetIndState extends State<RoutineWidgetInd> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -21,7 +24,7 @@ class _RoutineWidgetState extends State<RoutineWidget> {
         iconTheme: const IconThemeData(color: gPrimaryColorDark),
         backgroundColor: gPrimaryColor,
         title:
-            const Text("Routines", style: TextStyle(color: gPrimaryColorDark)),
+             Text(widget.name + ' Routine', style: TextStyle(color: gPrimaryColorDark)),
         actions: [
           IconButton(
             onPressed: () => FirebaseAuth.instance.signOut(),
@@ -32,9 +35,9 @@ class _RoutineWidgetState extends State<RoutineWidget> {
           ),
         ],
       ),
-      body: const Center(
+      body:  Center(
         child: Background(
-          child: RoutinesAllBatch(),
+          child: RoutineInd(name: widget.name, url: widget.url),
         ),
       ),
     );
@@ -65,7 +68,7 @@ class _BackgroundState extends State<Background> {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.fitHeight,
-                image: AssetImage('url'),
+                image: AssetImage('images/background_wave2.jpg'),
               ),
             ),
           ),
@@ -89,7 +92,7 @@ class RoutineScreen extends StatelessWidget {
         primaryColorDark: Colors.grey[850],
         scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
-      home: RoutineWidget(),
+      home: RoutineWidgetInd(name: '', url: ''),
     );
   }
 }
