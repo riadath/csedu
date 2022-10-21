@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csedu/Constants.dart';
+import 'package:csedu/StudentProfiles/show_user_profile.dart';
 import 'package:csedu/user_model.dart';
 import 'package:flutter/material.dart';
 
@@ -64,7 +65,19 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
         child: ListTile(
           leading: CircleAvatar(child: Text('${user.batch}')),
           title: Text(user.name),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfileCard(
+                    uid: user.uid,
+                    name: user.name,
+                    batch: user.batch.toString(),
+                    bloodGroup: user.bloodGroup,
+                    linkedin: user.linkedin,
+                  ),
+                ));
+          },
           // subtitle: Text(user.linkedin),
         ),
       );

@@ -16,6 +16,7 @@ class DatabaseService {
       'batch': batch,
       'bloodGroup': bloodGroup,
       'showData': showData,
+      'uid': uid,
     });
   }
 }

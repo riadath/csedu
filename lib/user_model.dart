@@ -1,4 +1,5 @@
 class UserModel {
+  final String uid;
   final String name;
   final int batch;
   final String bloodGroup;
@@ -6,6 +7,7 @@ class UserModel {
   final bool? showData;
 
   UserModel({
+    required this.uid,
     required this.name,
     required this.batch,
     required this.linkedin,
@@ -19,6 +21,7 @@ class UserModel {
         'linkedin': linkedin,
         'bloodGroup': bloodGroup,
         'showData': showData,
+        'uid': uid,
       };
   static UserModel fromJson(Map<String, dynamic> json) => UserModel(
         name: json['name'],
@@ -26,5 +29,6 @@ class UserModel {
         linkedin: json['linkedin'],
         bloodGroup: json['bloodGroup'],
         showData: json['showData'],
+        uid: json['uid'],
       );
 }

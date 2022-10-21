@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csedu/Constants.dart';
+import 'package:csedu/firebase_storage_image.dart';
 import 'package:csedu/rounded_button.dart';
 import 'package:csedu/rounded_input_field.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +59,8 @@ class _AddProfileWidgetState extends State<AddProfileWidget> {
   var batchnoController = TextEditingController();
   var bloodgroupController = TextEditingController();
   var linkedinController = TextEditingController();
-
+  bool ifImage = false;
+  final StorageImage imageStorage = StorageImage();
   @override
   void dispose() {
     batchnoController.dispose();
@@ -94,6 +97,25 @@ class _AddProfileWidgetState extends State<AddProfileWidget> {
             style: TextStyle(
               fontSize: 23,
             ),
+          ),
+          SizedBox(height: screenSize.height * 0.05),
+          ElevatedButton.icon(
+            label: const Text('Upload Pofile Photo'),
+            icon: const Icon(Icons.image),
+            onPressed: () async {
+              final result = await FilePicker.platform.pickFiles(
+                  allowMultiple: false,
+                  type: FileType.custom,
+                  allowedExtensions: ['png', 'jpg', 'jpeg', 'svg']);
+              if (result != null) {
+                ifImage = true;
+              } else {
+                return;
+              }
+              final path = result.files.single.path!;
+              final fileName = FirebaseAuth.instance.currentUser!.uid;
+              imageStorage.uploadFile(path, fileName);
+            },
           ),
           RoundedInputField(
             hintText: batchHintText,
