@@ -35,10 +35,10 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     );
   }
 
-  final CollectionReference _usersRef =
-      FirebaseFirestore.instance.collection('users');
-  String get uid => FirebaseAuth.instance.currentUser!.uid;
   void setInitial() {
+    final CollectionReference _usersRef =
+        FirebaseFirestore.instance.collection('users');
+    String uid = FirebaseAuth.instance.currentUser!.uid;
     final docRef = _usersRef.doc(uid);
     docRef.get().then(
       (DocumentSnapshot doc) {

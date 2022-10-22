@@ -75,6 +75,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                     batch: user.batch.toString(),
                     bloodGroup: user.bloodGroup,
                     linkedin: user.linkedin,
+                    email: user.email,
                   ),
                 ));
           },

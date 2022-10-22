@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DatabaseService {
   final String uid;
@@ -17,6 +18,7 @@ class DatabaseService {
       'bloodGroup': bloodGroup,
       'showData': showData,
       'uid': uid,
+      'email': FirebaseAuth.instance.currentUser?.email,
     });
   }
 }
