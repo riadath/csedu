@@ -1,4 +1,3 @@
-import 'package:csedu/StudyMaterials/pdf_exanple.dart';
 import 'package:csedu/StudyMaterials/study_material_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,7 @@ class StudyMaterialTabView extends StatefulWidget {
 class _StudyMaterialTabViewState extends State<StudyMaterialTabView> {
   int currentIndex = 0;
   final screens = [
-    Center( child: MyMy() ),
+    Center( child: Text('1-1 Questions',style: TextStyle( fontSize:60 )) ),
     Center( child: Text('1-2 Questions',style: TextStyle( fontSize:60 )) ),
     Center( child: Text('2-1 Questions',style: TextStyle( fontSize:60 )) ),
     Center( child: Text('2-2 Questions',style: TextStyle( fontSize:60 )) ),

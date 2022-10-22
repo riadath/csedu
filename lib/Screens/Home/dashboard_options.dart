@@ -1,6 +1,7 @@
 import 'package:csedu/Screens/Routine/RountineIndividual/Routine_pageInd.dart';
 import 'package:csedu/StudentProfiles/student_profile_page.dart';
 import 'package:csedu/Screens/Routine/Routine_page.dart';
+import 'package:csedu/StudyMaterials/pdf_viewer_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../StudyMaterials/study_materials_page.dart';
@@ -59,7 +60,7 @@ class DashboardOptions extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Study_Material_Home(),
+                    builder: (context) => HomePage(),
                   ));
             },
           ),
