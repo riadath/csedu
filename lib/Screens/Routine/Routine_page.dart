@@ -34,7 +34,7 @@ class _RoutineWidgetIndState extends State<RoutineWidget> {
         ],
       ),
 
-      body: const Center(
+      body:  Center(
         child: Background(
           child: RoutinesAllBatch(),
         ),

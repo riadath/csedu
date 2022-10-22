@@ -2,68 +2,80 @@ import 'package:csedu/Screens/Routine/RountineIndividual/Routine_Ind.dart';
 import 'package:csedu/Screens/Routine/RountineIndividual/Routine_pageInd.dart';
 import 'package:csedu/StudentProfiles/student_profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:csedu/Screens/Routine/classroom.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RoutinesAllBatch extends StatelessWidget {
-  const RoutinesAllBatch({
-    Key? key,
-  }) : super(key: key);
+
+  List<Classroom> list = <Classroom>[];
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    list.add(Classroom(courseName: 'CSE-1001', instructor: 'MRR', starTime: '8:30 PM', endTime: '10:00 PM'));
+    list.add(Classroom(courseName: 'CSE-1002', instructor: 'MIB', starTime: '10:00 PM', endTime: '11:30 PM'));
+    list.add(Classroom(courseName: 'CSE-1002', instructor: 'MIB', starTime: '10:00 PM', endTime: '11:30 PM'));
+    list.add(Classroom(courseName: 'CSE-1002', instructor: 'MIB', starTime: '10:00 PM', endTime: '11:30 PM'));
+    list.add(Classroom(courseName: 'CSE-1002', instructor: 'MIB', starTime: '10:00 PM', endTime: '11:30 PM'));
+    list.add(Classroom(courseName: 'CSE-1002', instructor: 'MIB', starTime: '10:00 PM', endTime: '11:30 PM'));
+    list.add(Classroom(courseName: 'CSE-1002', instructor: 'MIB', starTime: '10:00 PM', endTime: '11:30 PM'));
     return Container(
       padding: const EdgeInsets.only(top: 50),
-      child: GridView.count(
-        primary: false,
-        padding: const EdgeInsets.all(20),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 80,
-        crossAxisCount: 2,
-        children: <Widget>[
-          CardCreator(
-            screenSize: screenSize,
-            title: '27',
-            onPress: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>  RoutineWidgetInd(name: '27', url: 'images/routine_26.png',),
-                  ));
-            },
-          ),
-          CardCreator(
-            screenSize: screenSize,
-            title: '26',
-            onPress: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>  RoutineWidgetInd(name: '26', url: 'images/routine_26.png',),
-                  ));
-            },
-          ),
-          CardCreator(
-            screenSize: screenSize,
-            title: '25',
-            onPress: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>  RoutineWidgetInd(name: '25', url: 'images/routine_26.png',),
-                  ));
-            },
-          ),
-          CardCreator(
-            screenSize: screenSize,
-            title: '24',
-            onPress: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>  RoutineWidgetInd(name: '24', url: 'images/routine_26.png',),
-                  ));
-            },
-          ),
+      child: CustomScrollView(
+        slivers: <Widget>[
+          SliverList(
+              delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index){
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        alignment: Alignment.center,
+                        color: Colors.red[200 + 200*(index%2)],
+                        height: 150,
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              list[index].courseName,
+                              style: const TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                                list[index].instructor,
+                                style: const TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Text(
+                                    'Start Time : ${list[index].starTime}',
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                    'End Time : ${list[index].endTime}',
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                              ],
+                            ),
+
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                  childCount: list.length,
+              ),
+          )
         ],
       ),
 

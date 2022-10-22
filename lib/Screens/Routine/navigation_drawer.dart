@@ -36,6 +36,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         children: [
           // const SizedBox(height: 50),
           buildNavbarItems(
+              icon: Icons.add, text: "Add A class to Routine", onTap: () {}),
+          buildNavbarItems(
               icon: Icons.person, text: "Add Your Profile", onTap: () {}),
           buildNavbarItems(
               icon: Icons.notifications, text: "Notifications", onTap: () {}),

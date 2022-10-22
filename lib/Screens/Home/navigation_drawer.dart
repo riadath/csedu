@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csedu/StudentProfiles/add_profile_page.dart';
-import 'package:csedu/constants.dart';
+import 'package:csedu/Constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
