@@ -1,38 +1,35 @@
+import 'package:csedu/Screens/Routine/Routine_screen.dart';
+import 'package:csedu/StudyMaterials/past_questions.dart';
+import 'package:csedu/StudyMaterials/pdf_viewer_page.dart';
+import 'package:csedu/StudyMaterials/resources.dart';
 import 'package:csedu/StudyMaterials/study_material_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:csedu/Screens/Home/home_screen.dart';
 
 import '../Constants.dart';
 
 class StudyMaterialTabView extends StatefulWidget {
   final int semesterNo;
   const StudyMaterialTabView(this.semesterNo );
-
   @override
   State<StudyMaterialTabView> createState() => _StudyMaterialTabViewState();
+
 }
 
 class _StudyMaterialTabViewState extends State<StudyMaterialTabView> {
   int currentIndex = 0;
-  final screens = [
-    Center( child: Text('1-1 Questions',style: TextStyle( fontSize:60 )) ),
-    Center( child: Text('1-2 Questions',style: TextStyle( fontSize:60 )) ),
-    Center( child: Text('2-1 Questions',style: TextStyle( fontSize:60 )) ),
-    Center( child: Text('2-2 Questions',style: TextStyle( fontSize:60 )) ),
-    Center( child: Text('3-1 Questions',style: TextStyle( fontSize:60 )) ),
-    Center( child: Text('3-2 Questions',style: TextStyle( fontSize:60 )) ),
-    Center( child: Text('4-1 Questions',style: TextStyle( fontSize:60 )) ),
-    Center( child: Text('4-2 Questions',style: TextStyle( fontSize:60 )) ),
-    Center( child: Text('1-1 Resources',style: TextStyle( fontSize:60 )) ),
-    Center( child: Text('1-2 Resources',style: TextStyle( fontSize:60 )) ),
-    Center( child: Text('2-1 Resources',style: TextStyle( fontSize:60 )) ),
-    Center( child: Text('2-2 Resources',style: TextStyle( fontSize:60 )) ),
-    Center( child: Text('3-1 Resources',style: TextStyle( fontSize:60 )) ),
-    Center( child: Text('3-2 Resources',style: TextStyle( fontSize:60 )) ),
-    Center( child: Text('4-1 Resources',style: TextStyle( fontSize:60 )) ),
-    Center( child: Text('4-2 Resources',style: TextStyle( fontSize:60 )) ),
-  ];
+  List<String> First = ['/Study Materials/1-1 Past Questions', '/Study Materials/1-2 Past Questions','/Study Materials/2-1 Past Questions','/Study Materials/2-1 Past Questions',
+    '/Study Materials/3-1 Past Questions','/Study Materials/3-2 Past Questions','/Study Materials/4-1 Past Questions','/Study Materials/4-2 Past Questions'];
+  List<String> Second = ['/Final','/In Course','/Resources'];
+
+
   @override
   Widget build(BuildContext context) {
+
+    past_questions question = past_questions( First[widget.semesterNo] );
+    Resources resources = Resources( First[widget.semesterNo] );
+
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Study Materials'),
@@ -40,7 +37,7 @@ class _StudyMaterialTabViewState extends State<StudyMaterialTabView> {
         backgroundColor: gPrimaryColor,
       ),
       drawer : MainDrawer(),
-      body: screens[ widget.semesterNo+(8*currentIndex) ],
+      body: currentIndex == 0 ? question.pastQuestions() : resources.resources(),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: gPrimaryColor,
         type: BottomNavigationBarType.fixed,

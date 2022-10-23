@@ -11,17 +11,17 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class pdfviewer extends StatefulWidget {
+  String str;
+  pdfviewer(this.str);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<pdfviewer> createState() => _pdfviewer(str);
 }
 
-class _HomePageState extends State<HomePage> {
-
-  String pr = 'gs://csedu-project.appspot.com/Study Materials/1-1 Past Questions/Final/1-1, 2011, Final.pdf';
-  String str = '/Study Materials/1-1 Past Questions/Final/';
+class _pdfviewer extends State<pdfviewer> {
+  String str;
+  _pdfviewer(this.str);
   Future<ListResult>? futureFiles;
 
 
@@ -60,14 +60,6 @@ class _HomePageState extends State<HomePage> {
                             MaterialPageRoute(
                               builder: (context) => MyHomePage(st),
                             ));
-
-                        /*
-                        final docUrl = await FirebaseStorage.instance
-                            .ref()
-                            .child(str+file.name)
-                            .getDownloadURL();
-                        final docFile = DefaultCacheManager().getSingleFile(docUrl);
-                        pdfviewer(docFile); */
                       }
                     ),
                   );

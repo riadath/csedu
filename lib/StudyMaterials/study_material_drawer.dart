@@ -4,7 +4,6 @@ import 'package:csedu/StudyMaterials/study_materials_tab_view.dart';
 import '../Constants.dart';
 
 class MainDrawer extends StatelessWidget {
-  const MainDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
