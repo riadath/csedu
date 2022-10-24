@@ -19,6 +19,7 @@ class _RoutineWidgetIndState extends State<RoutineWidget> {
     return Scaffold(
       drawer: const NavigationDrawer(),
       appBar: AppBar(
+        elevation: 0,
         iconTheme: const IconThemeData(color: gPrimaryColorDark),
         backgroundColor: gPrimaryColor,
         title:
@@ -34,13 +35,14 @@ class _RoutineWidgetIndState extends State<RoutineWidget> {
         ],
       ),
 
-      body:  Center(
+      body:  const Center(
         child: Background(
-          child: RoutinesAllBatch(),
+          child: RoutineByDay(),
         ),
       ),
 
       floatingActionButton: FloatingActionButton(
+
         onPressed: (){
           Navigator.push(
               context,
