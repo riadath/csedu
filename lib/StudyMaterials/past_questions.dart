@@ -32,7 +32,7 @@ class past_questions{
                 child: const SizedBox(
                   width: 400,
                   height: 100,
-                  child: Center( child: Text('Resources',style: TextStyle( color:Colors.white )) ),
+                  child: Center( child: Text('Final Questions',style: TextStyle( color:Colors.white )) ),
                 ),
               ),
             ),
@@ -55,7 +55,7 @@ class past_questions{
                 child: const SizedBox(
                   width: 400,
                   height: 100,
-                  child: Center( child: Text('Resources',style: TextStyle( color:Colors.white )) ),
+                  child: Center( child: Text('In Course Questions',style: TextStyle( color:Colors.white )) ),
                 ),
               ),
             ),
