@@ -14,9 +14,8 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends State<HomeWidget> {
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      drawer: NavigationDrawer(),
+      drawer: const NavigationDrawer(),
       appBar: AppBar(
         iconTheme: const IconThemeData(color: gPrimaryColorDark),
         backgroundColor: gPrimaryColor,
@@ -89,7 +88,7 @@ class HomeScreen extends StatelessWidget {
         primaryColorDark: Colors.grey[850],
         scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
-      home: HomeWidget(),
+      home: const HomeWidget(),
     );
   }
 }

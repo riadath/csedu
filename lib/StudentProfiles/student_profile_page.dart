@@ -4,8 +4,14 @@ import 'package:csedu/StudentProfiles/show_user_profile.dart';
 import 'package:csedu/user_model.dart';
 import 'package:flutter/material.dart';
 
+import '../Screens/Home/navigation_drawer.dart';
+
 class StudentProfilePage extends StatefulWidget {
-  const StudentProfilePage({Key? key}) : super(key: key);
+  final int batch;
+  const StudentProfilePage({
+    required this.batch,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<StudentProfilePage> createState() => _StudentProfilePageState();
@@ -23,11 +29,20 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
         scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
       home: Scaffold(
+        drawer: const NavigationDrawer(),
         appBar: AppBar(
           title: const Text('Student List'),
+          backgroundColor: gPrimaryColor,
+          foregroundColor: gPrimaryColorDark,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.search),
+            )
+          ],
         ),
         body: StreamBuilder<List<UserModel>>(
-          stream: readUsers(),
+          stream: readUsers(widget.batch),
           builder: ((context, snapshot) {
             final users = snapshot.data;
             if (snapshot.hasError) {
@@ -47,10 +62,11 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
     );
   }
 
-  Stream<List<UserModel>> readUsers() {
+  Stream<List<UserModel>> readUsers(int batch) {
     return FirebaseFirestore.instance
         .collection('users')
         .where('showData', isEqualTo: true)
+        .where('batch', isEqualTo: batch)
         .orderBy('name')
         .snapshots()
         .map((snapshot) => snapshot.docs
