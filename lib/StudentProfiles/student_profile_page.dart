@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csedu/Constants.dart';
 import 'package:csedu/StudentProfiles/show_user_profile.dart';
+import 'package:csedu/rounded_input_field.dart';
 import 'package:csedu/user_model.dart';
 import 'package:flutter/material.dart';
-
-import '../Screens/Home/navigation_drawer.dart';
 
 class StudentProfilePage extends StatefulWidget {
   final int batch;
@@ -18,6 +17,9 @@ class StudentProfilePage extends StatefulWidget {
 }
 
 class _StudentProfilePageState extends State<StudentProfilePage> {
+  Icon tIcon = const Icon(Icons.search);
+  Widget searchBar = const Text('');
+  final searchbarController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,20 +31,36 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
         scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
       home: Scaffold(
-        drawer: const NavigationDrawer(),
         appBar: AppBar(
-          title: const Text('Student List'),
           backgroundColor: gPrimaryColor,
           foregroundColor: gPrimaryColorDark,
-          actions: [
+          actions: <Widget>[
+            searchBar,
             IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.search),
+              onPressed: () {
+                setState(() {
+                  if (tIcon.icon == Icons.search) {
+                    tIcon = const Icon(Icons.cancel);
+                    searchBar = RoundedInputField(
+                        hintText: 'Search',
+                        icon: Icons.search,
+                        onChagned: (value) {
+                          setState(() {});
+                        },
+                        controller: searchbarController);
+                  } else {
+                    tIcon = const Icon(Icons.search);
+                    searchBar = const Text('');
+                    searchbarController.clear();
+                  }
+                });
+              },
+              icon: tIcon,
             )
           ],
         ),
         body: StreamBuilder<List<UserModel>>(
-          stream: readUsers(widget.batch),
+          stream: readUsersSearch(widget.batch, searchbarController.text),
           builder: ((context, snapshot) {
             final users = snapshot.data;
             if (snapshot.hasError) {
@@ -62,7 +80,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
     );
   }
 
-  Stream<List<UserModel>> readUsers(int batch) {
+  Stream<List<UserModel>> readUsersSearch(int batch, String search) {
     return FirebaseFirestore.instance
         .collection('users')
         .where('showData', isEqualTo: true)
@@ -71,6 +89,8 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((doc) => UserModel.fromJson(doc.data()))
+            .where((element) =>
+                element.name.toLowerCase().contains(search.toLowerCase()))
             .toList());
   }
 

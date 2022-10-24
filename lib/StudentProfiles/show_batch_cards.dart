@@ -16,7 +16,7 @@ class BatchCardView extends StatelessWidget {
         backgroundColor: gPrimaryColor,
         title: const Text("Select Batch",
             style: TextStyle(color: gPrimaryColorDark)),
-        actions: [
+        actions: <Widget>[
           IconButton(
             onPressed: () => FirebaseAuth.instance.signOut(),
             icon: const Icon(
