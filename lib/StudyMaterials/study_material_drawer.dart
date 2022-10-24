@@ -29,7 +29,6 @@ class MainDrawer extends StatelessWidget {
             title: Text('1-1', style : TextStyle(fontSize : 18)),
             onTap : () {
               Navigator.of(context).pop();
-              Navigator.of(context).pop();
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -41,7 +40,6 @@ class MainDrawer extends StatelessWidget {
             leading : Icon( Icons.school ),
             title: Text('1-2', style : TextStyle(fontSize : 18)),
             onTap : () {
-              Navigator.of(context).pop();
               Navigator.of(context).pop();
               Navigator.push(
                   context,
@@ -55,7 +53,6 @@ class MainDrawer extends StatelessWidget {
             title: Text('2-1', style : TextStyle(fontSize : 18)),
              onTap : () {
                Navigator.of(context).pop();
-               Navigator.of(context).pop();
                Navigator.push(
                    context,
                    MaterialPageRoute(
@@ -67,7 +64,6 @@ class MainDrawer extends StatelessWidget {
             leading : Icon( Icons.school ),
             title: Text('2-2', style : TextStyle(fontSize : 18)),
             onTap : () {
-              Navigator.of(context).pop();
               Navigator.of(context).pop();
               Navigator.push(
                   context,
@@ -81,7 +77,6 @@ class MainDrawer extends StatelessWidget {
             title: Text('3-1', style : TextStyle(fontSize : 18)),
             onTap : () {
               Navigator.of(context).pop();
-              Navigator.of(context).pop();
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -93,7 +88,6 @@ class MainDrawer extends StatelessWidget {
             leading : Icon( Icons.school ),
             title: Text('3-2', style : TextStyle(fontSize : 18)),
             onTap : () {
-              Navigator.of(context).pop();
               Navigator.of(context).pop();
               Navigator.push(
                   context,
@@ -107,7 +101,6 @@ class MainDrawer extends StatelessWidget {
             title: Text('4-1', style : TextStyle(fontSize : 18)),
             onTap : () {
               Navigator.of(context).pop();
-              Navigator.of(context).pop();
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -119,7 +112,6 @@ class MainDrawer extends StatelessWidget {
             leading : Icon( Icons.school ),
             title: Text('4-2', style : TextStyle(fontSize : 18)),
             onTap : () {
-              Navigator.of(context).pop();
               Navigator.of(context).pop();
               Navigator.push(
                   context,

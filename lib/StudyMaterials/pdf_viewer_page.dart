@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:csedu/Constants.dart';
 import 'package:csedu/StudyMaterials/viewer.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,8 @@ class _pdfviewer extends State<pdfviewer> {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
-        title: const Text('Download Files'),
+        backgroundColor: gPrimaryColor,
+        title: const Text( 'PDFs' ),
       ),
       body: FutureBuilder<ListResult>(
         future: futureFiles,
