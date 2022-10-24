@@ -1,3 +1,4 @@
+import 'package:csedu/Constants.dart';
 import 'package:csedu/firebase_storage_image.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,13 +22,14 @@ class _BackgroundState extends State<Background> {
         alignment: Alignment.center,
         children: [
           Container(
+            color: Colors.grey.shade500,
             width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.fitHeight,
-                image: AssetImage('images/vectorWave3.jpg'),
-              ),
-            ),
+            // decoration: const BoxDecoration(
+            //   image: DecorationImage(
+            //     fit: BoxFit.fitHeight,
+            //     image: AssetImage('images/vectorWave0.jpg'),
+            //   ),
+            // ),
           ),
           widget.child,
         ],
@@ -89,61 +91,35 @@ class _ProfileCardState extends State<ProfileCard> {
                 },
               ),
               const SizedBox(height: 20),
-              Text(
-                widget.name,
-                style:
-                    const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              InfoCard(
+                info: widget.name,
+                icon: Icon(Icons.person, color: Colors.teal.shade400),
+                ifMail: false,
+                ifLi: false,
               ),
-              const SizedBox(height: 15),
-              Text(
-                'Email: ${widget.email}',
-                style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.normal),
+              InfoCard(
+                info: widget.email,
+                icon: Icon(Icons.email, color: Colors.teal.shade400),
+                ifMail: true,
+                ifLi: false,
               ),
-              const SizedBox(height: 15),
-              Text(
-                'Blood Group: ${widget.bloodGroup}',
-                style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.normal),
+              InfoCard(
+                info: widget.bloodGroup,
+                icon: Icon(Icons.bloodtype, color: Colors.teal.shade400),
+                ifMail: false,
+                ifLi: false,
               ),
-              const SizedBox(height: 15),
-              Text(
-                'Batch: ${widget.batch}',
-                style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.normal),
+              InfoCard(
+                info: '${widget.batch}th Batch',
+                icon: Icon(Icons.class_, color: Colors.teal.shade400),
+                ifMail: false,
+                ifLi: false,
               ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    width: 18,
-                  ),
-                  ElevatedButton.icon(
-                    icon: const Icon(Icons.person),
-                    onPressed: _launchUrl,
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                      ),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.pink),
-                      padding: MaterialStateProperty.all(
-                        const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 20),
-                      ),
-                    ),
-                    label: const Text(
-                      "LinkedIn",
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 18,
-                  ),
-                ],
+              InfoCard(
+                info: widget.linkedin,
+                icon: Icon(Icons.class_, color: Colors.teal.shade400),
+                ifMail: false,
+                ifLi: true,
               ),
             ],
           ),
@@ -151,12 +127,56 @@ class _ProfileCardState extends State<ProfileCard> {
       ),
     );
   }
+}
 
-  Future<void> _launchUrl() async {
-    var url =
-        Uri.parse('https://www.linkedin.com/in/reyadath-ullah-akib-053181199');
-    if (!await launchUrl(url)) {
-      throw 'Could not launch $url';
-    }
+class InfoCard extends StatelessWidget {
+  final String info;
+  final Icon icon;
+  final bool ifMail, ifLi;
+  const InfoCard({
+    required this.ifMail,
+    required this.ifLi,
+    required this.info,
+    required this.icon,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Card(
+        margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+        child: ListTile(
+          leading: icon,
+          trailing: (ifMail || ifLi)
+              ? const Icon(Icons.directions)
+              : const Icon(
+                  Icons.query_builder,
+                  color: gPrimaryColorLight,
+                ),
+          title: Text(
+            ifLi ? 'LinkedIn' : info,
+            style: TextStyle(
+                fontFamily: 'SourceSansPro',
+                fontSize: 18,
+                color: Colors.teal.shade400),
+          ),
+        ),
+      ),
+      onTap: () {
+        if (ifMail) {
+          _launchUrl('mailto:$info');
+        } else if (ifLi) {
+          _launchUrl(info);
+        }
+      },
+    );
+  }
+}
+
+Future<void> _launchUrl(String link) async {
+  var url = Uri.parse(link);
+  if (!await launchUrl(url)) {
+    throw 'Could not launch $url';
   }
 }
