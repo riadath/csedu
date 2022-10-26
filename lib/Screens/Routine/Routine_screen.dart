@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csedu/Constants.dart';
 import 'package:csedu/Screens/Routine/ClassAdd_page.dart';
+import 'package:csedu/Screens/Routine/routineInit.dart';
 import 'package:csedu/StudentProfiles/student_profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,14 @@ import 'package:csedu/rounded_button.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../StudentProfiles/show_user_profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:csedu/Screens/Routine/routineInit.dart';
+
+List<bool> _selected = <bool>[false, false];
+DateTime date = DateTime.now().toLocal();
+
+
+
 
 class RoutineByDay extends StatefulWidget {
   const RoutineByDay({Key? key}) : super(key: key);
@@ -22,8 +31,8 @@ class RoutineByDay extends StatefulWidget {
 class _RoutineByDay extends State<RoutineByDay> {
 
   int day = DateTime.now().weekday;
-  String curBatch = '26';
-  DateTime date = DateTime.now().toLocal();
+  String? curBatch = Batch;
+
   final List<String> weekDays = [
     'Sunday',
     'Monday',
@@ -33,11 +42,12 @@ class _RoutineByDay extends State<RoutineByDay> {
     'Friday',
     'Saturday'
   ];
+
   @override
   Widget build(BuildContext context)  {
+
+
     Size screenSize = MediaQuery.of(context).size;
-    String s = 'Cse-1101';
-    print(s.toUpperCase());
     return MaterialApp(
       title: 'Routine',
       theme: ThemeData(
@@ -56,10 +66,11 @@ class _RoutineByDay extends State<RoutineByDay> {
                       width: screenSize.width*0.30,
                       child: ElevatedButton(
                           onPressed: () {
-                            date = date.subtract(Duration(days:1));
+                            date = date.subtract(const Duration(days:1));
 
                             setState(() {
                                     day = date.weekday;
+                                    _selected = <bool>[false, false];
                             });
                           },
                           child: Column(
@@ -77,7 +88,7 @@ class _RoutineByDay extends State<RoutineByDay> {
                             Text(weekDays[day - 1], textAlign: TextAlign.center, style: TextStyle(
                               fontSize: screenSize.height*0.03,
                             ),),
-                            Text(DateFormat('dd-mm-yyyy').format(date)),
+                            Text(DateFormat('dd-MM-yyyy').format(date)),
                           ],
                         )
                     ),
@@ -85,10 +96,9 @@ class _RoutineByDay extends State<RoutineByDay> {
                       width: screenSize.width*0.30,
                       child: ElevatedButton(
                           onPressed: () {
-                            date = date.add(Duration(days:1));
+                            date = date.add(const Duration(days:1));
                             setState(() {
                                 day = date.weekday;
-                                print(day);
                             });
                           },
                           child: Column(
@@ -102,6 +112,8 @@ class _RoutineByDay extends State<RoutineByDay> {
                   ],
               ),
             ),
+
+
             Expanded(
               child: StreamBuilder<List<Classroom>>(
                 stream: readRoutine(),
@@ -150,29 +162,45 @@ class _RoutineByDay extends State<RoutineByDay> {
   );
 
 }
-
+String percent = 'no data';
 
 class routineCard extends StatefulWidget{
-  @override
   Classroom course;
   routineCard({super.key, required this.course});
+  @override
   State<StatefulWidget> createState() => _routineCard(course: course);
 
 }
 
-const List<Widget> state = <Widget>[
-  Text('Done'),
-  Text('Missed'),
-  Text('Skipped')
-];
+Map<String, List<bool>> attendance = {};
 class _routineCard extends State<routineCard> {
   Classroom course;
   _routineCard({required this.course});
-  final List<bool> _selected = <bool>[false, false, true];
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-
+    String Date = DateFormat('dd-MM-yyyy').format(date);
+    String id = '$Date - ${course.courseName}';
+    List<bool>? list = [false, false];
+    if(attendance[id] != null) {
+      list = attendance[id];
+      //print(attendance[id]);
+    }
+    // print('on top');
+    //print(list);
+    // print(id);
+    List checkList = [
+      {
+        "id" : 0,
+        "value" : list?[0],
+        "title" : 'Done',
+      },
+      {
+        "id" : 1,
+        "value" : list?[1],
+        "title" : 'Missed',
+      }
+    ];
     return GestureDetector(
       child: Card(
           color: const Color.fromARGB(255, 194, 193, 193),
@@ -182,67 +210,39 @@ class _routineCard extends State<routineCard> {
               children: [
                 Row(
                   children: <Widget>[
-                    SizedBox(width: screenSize.width*0.30,
+                    SizedBox(width: screenSize.width*0.32,
                       child: Column(
-                        children: <Widget>[
-                          ToggleButtons(
-                              direction: Axis.vertical,
-                            onPressed: (int index) {
-                              setState(() {
-                                // The button that is tapped is set to true, and the others to false.
-                                for (int i = 0; i < _selected.length; i++) {
-                                  _selected[i] = i == index;
-                                }
-                              });
-                            },
-                            borderRadius: const BorderRadius.all(Radius.circular(0)),
-                            selectedBorderColor: Colors.red[700],
-                            selectedColor: Colors.black,
-                            fillColor: Colors.red[500],
-                            color: Colors.red[400],
-                            constraints: const BoxConstraints(
-                              minHeight: 30.0,
-                              maxHeight: 30.0,
-                              minWidth: 50,
-                              maxWidth: 50,
-                            ),
-                            isSelected: _selected,
-                            children: state,
-                          ),
+                        children: List.generate(
+                          checkList.length,
+                            (index) => CheckboxListTile(
+                              controlAffinity: ListTileControlAffinity.leading,
+                                dense: true,
+                                title: Text(checkList[index]['title']),
+                                value: checkList[index]['value'],
+                                onChanged: (value){
+                                  setState(() {
+                                    for(var element in checkList!){
+                                      element['value'] = false;
+                                    }
+                                    checkList[index]['value'] = value;
+                                    attendance[id] = [checkList[0]['value'], checkList[1]['value']];
 
-                        ],
+                                    // print('on bottom');
+                                    // print(attendance[id]);
+                                    // print(checkList);
+                                  });
+                                }
+                            )
+                        )
                       ),
                     ),
                     SizedBox(
-                      width: screenSize.width*0.30,
+                      width: screenSize.width*0.28,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            course.courseName,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Lucida Console',
-                              fontSize: 20,
-                            ),
-                          ),
-                          Text(
-                            course.instructor,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Lucida Console',
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: screenSize.width*0.31,
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            'Start at : ${course.startTime}',
+                            '${course.courseName} - ${course.batch}' ,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Lucida Console',
@@ -250,7 +250,31 @@ class _routineCard extends State<routineCard> {
                             ),
                           ),
                           Text(
-                            'End at : ${course.endTime}',
+                            course.instructor,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Lucida Console',
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: screenSize.width*0.25,
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            course.startTime,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Lucida Console',
+                              fontSize: 15,
+                            ),
+                          ),
+                          Text('to'),
+                          Text(
+                            course.endTime,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Lucida Console',
@@ -263,11 +287,11 @@ class _routineCard extends State<routineCard> {
                   ],
                 ),
             Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child : LinearPercentIndicator(
                   animation: true,
-                  percent: 0.7,
-                  center: Text('.5%'),
+                  percent: calc(course.courseName),
+                  center: Text(percent),
                   lineHeight: 20,
                   progressColor: Colors.green,
                   backgroundColor: Colors.red,
@@ -293,3 +317,24 @@ class _routineCard extends State<routineCard> {
   }
 
 }
+
+double calc(String course){
+  int tot = 0, attend = 0;
+  attendance.forEach((key, value) {
+    if(key.contains(course)){
+      tot++;
+      if(value[0]) attend++;
+    }
+  });
+  if(tot == 0){
+    percent = 'no data';
+    return 1;
+  }
+  double res = attend/tot;
+
+  percent = '${(res*100).toStringAsFixed(0)}%';
+
+  return res;
+}
+
+

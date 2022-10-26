@@ -1,3 +1,4 @@
+import 'package:csedu/Screens/Routine/routineInit.dart';
 import 'package:csedu/StudentProfiles/student_profile_page.dart';
 import 'package:csedu/Screens/Routine/Routine_page.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class DashboardOptions extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RoutineWidget(),
+                    builder: (context) => RoutineInit(),
                   ));},
           ),
           CardCreator(
