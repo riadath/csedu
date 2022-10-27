@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 String batchHintText = 'Batch';
 String bloodHintText = "Blood Group";
 String linkedinHintText = "LinkedIn";
+String rollHintText = "Roll";
 String myButtonText = "Add Profile";
 
 class NavigationDrawer extends StatefulWidget {
@@ -62,6 +63,12 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         } else {
           linkedinHintText = 'LinkedIn';
         }
+        if (data['roll'] != "") {
+          rollHintText = data['roll'].toString();
+          flag = true;
+        } else {
+          rollHintText = 'Roll';
+        }
 
         if (flag) {
           myButtonText = 'Update Profile';
@@ -97,6 +104,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                       batchnoht: batchHintText,
                       bloodht: bloodHintText,
                       linkedht: linkedinHintText,
+                      rollht: rollHintText,
                       buttonText: myButtonText,
                     );
                   },

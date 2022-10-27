@@ -10,7 +10,7 @@ class DatabaseService {
       FirebaseFirestore.instance.collection('users');
 
   Future<void> updateUserData(String name, String linkedin, int batch,
-      String bloodGroup, bool showData) async {
+      String bloodGroup, bool showData,int roll) async {
     return await brewCollection.doc(uid).set({
       'name': name,
       'linkedin': linkedin,
@@ -19,6 +19,7 @@ class DatabaseService {
       'showData': showData,
       'uid': uid,
       'email': FirebaseAuth.instance.currentUser?.email,
+      'roll':roll,
     });
   }
 }

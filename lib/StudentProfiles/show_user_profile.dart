@@ -45,9 +45,11 @@ class ProfileCard extends StatefulWidget {
   final String batch;
   final String bloodGroup;
   final String linkedin;
+  final String roll;
   const ProfileCard({
     required this.uid,
     required this.name,
+    required this.roll,
     required this.batch,
     required this.bloodGroup,
     required this.linkedin,
@@ -69,7 +71,7 @@ class _ProfileCardState extends State<ProfileCard> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(height: 200),
+              const SizedBox(height: 100),
               FutureBuilder(
                 future: image.downloadURL(widget.uid),
                 builder: (context, snapshot) {
@@ -94,6 +96,12 @@ class _ProfileCardState extends State<ProfileCard> {
               InfoCard(
                 info: widget.name,
                 icon: Icon(Icons.person, color: Colors.teal.shade400),
+                ifMail: false,
+                ifLi: false,
+              ),
+              InfoCard(
+                info: 'Roll: ${widget.roll}',
+                icon: Icon(Icons.front_hand, color: Colors.teal.shade400),
                 ifMail: false,
                 ifLi: false,
               ),

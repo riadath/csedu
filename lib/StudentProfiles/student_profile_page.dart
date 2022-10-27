@@ -85,7 +85,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
         .collection('users')
         .where('showData', isEqualTo: true)
         .where('batch', isEqualTo: batch)
-        .orderBy('name')
+        .orderBy('roll')
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((doc) => UserModel.fromJson(doc.data()))
@@ -99,7 +99,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
         shadowColor: Colors.lime,
         color: Colors.grey[300],
         child: ListTile(
-          leading: CircleAvatar(child: Text('${user.batch}')),
+          leading: CircleAvatar(child: Text('${user.roll}')),
           title: Text(user.name),
           onTap: () {
             Navigator.push(
@@ -112,6 +112,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                     bloodGroup: user.bloodGroup,
                     linkedin: user.linkedin,
                     email: user.email,
+                    roll: user.roll.toString(),
                   ),
                 ));
           },

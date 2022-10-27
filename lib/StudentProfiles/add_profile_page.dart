@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 String batchHintText = "";
 String bloodHintText = "";
 String linkedinHintText = "";
+String rollHintText = "";
 String myButtonText = "";
 
 class Background extends StatefulWidget {
@@ -59,6 +60,7 @@ class _AddProfileWidgetState extends State<AddProfileWidget> {
   var batchnoController = TextEditingController();
   var bloodgroupController = TextEditingController();
   var linkedinController = TextEditingController();
+  var rollController = TextEditingController();
   bool ifImage = false;
   final StorageImage imageStorage = StorageImage();
   @override
@@ -66,6 +68,7 @@ class _AddProfileWidgetState extends State<AddProfileWidget> {
     batchnoController.dispose();
     bloodgroupController.dispose();
     linkedinController.dispose();
+    rollController.dispose();
     super.dispose();
   }
 
@@ -135,22 +138,50 @@ class _AddProfileWidgetState extends State<AddProfileWidget> {
             onChagned: (value) {},
             controller: linkedinController,
           ),
+          RoundedInputField(
+            hintText: rollHintText,
+            icon: Icons.waving_hand,
+            onChagned: (value) {},
+            controller: rollController,
+          ),
           RoundedButton(
             buttonText: myButtonText,
             onPress: () {
               //change the data
-              int bno = int.parse(batchnoController.text.toString());
-              String bg = bloodgroupController.text.toString();
-              String li = linkedinController.text.toString();
-              bool flag = checkInput(bno, bg, li);
+              String bno, bg, li, roll;
+              if (batchnoController.text.isEmpty && batchHintText != 'Batch') {
+                bno = batchHintText;
+              } else {
+                bno = batchnoController.text.toString();
+              }
+              if (bloodgroupController.text.isEmpty &&
+                  bloodHintText != 'Blood Group') {
+                bg = bloodHintText;
+              } else {
+                bg = bloodgroupController.text.toString();
+              }
+              if (linkedinController.text.isEmpty &&
+                  linkedinHintText != 'LinkedIn') {
+                li = linkedinHintText;
+              } else {
+                li = linkedinController.text.toString();
+              }
+              if (rollController.text.isEmpty && rollHintText != 'Roll') {
+                roll = rollHintText;
+              } else {
+                roll = rollController.text.toString();
+              }
+
+              bool flag = checkInput(bno, bg, li, roll);
               if (!flag) {
                 setState(() {});
               } else {
                 final docUser = _usersRef.doc(uid);
                 docUser.update({
-                  'batch': bno,
+                  'batch': int.parse(bno),
                   'bloodGroup': bg,
                   'linkedin': li,
+                  'roll': int.parse(roll),
                   'showData': true,
                 });
                 Navigator.pop(context);
@@ -163,17 +194,31 @@ class _AddProfileWidgetState extends State<AddProfileWidget> {
     );
   }
 
-  bool checkInput(int bno, String bg, String li) {
+  bool checkInput(String bn1, String bg, String li, String roll) {
     int year = DateTime.now().year;
 
     final bloodGroupEx = RegExp(r'[A|B|AB|O][\+|\-]');
-
-    if (bno > (year - 1994) && bno < (year - 1989)) {
+    int bno = 0;
+    try {
+      bno = int.parse(bn1);
+    } catch (e) {
+      return false;
+    }
+    if (bno > 27 && bno < 24) {
       errorMessage = "Invalid Batch Number";
       return false;
     }
     if (!bloodGroupEx.hasMatch(bg)) {
       errorMessage = "Invalid Blood Group";
+      return false;
+    }
+    try {
+      int troll = int.parse(roll);
+      if (troll < 1) {
+        errorMessage = "Invalid Roll Number";
+        return false;
+      }
+    } catch (e) {
       return false;
     }
     return true;
@@ -184,9 +229,12 @@ class AddProfileScreen extends StatefulWidget {
   final String batchnoht;
   final String bloodht;
   final String linkedht;
+  final String rollht;
   final String buttonText;
+
   const AddProfileScreen(
       {required this.batchnoht,
+      required this.rollht,
       required this.bloodht,
       required this.linkedht,
       required this.buttonText,
@@ -202,7 +250,10 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
     batchHintText = widget.batchnoht;
     bloodHintText = widget.bloodht;
     linkedinHintText = widget.linkedht;
+    bloodHintText = widget.bloodht;
+    rollHintText = widget.rollht;
     myButtonText = widget.buttonText;
+
     super.initState();
   }
 
