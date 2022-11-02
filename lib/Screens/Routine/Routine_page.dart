@@ -40,19 +40,6 @@ class _RoutineWidgetIndState extends State<RoutineWidget> {
           child: RoutineByDay(),
         ),
       ),
-
-      floatingActionButton: FloatingActionButton(
-
-        onPressed: (){
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => classAdd(),
-              ));
-        },
-        child: const Icon(Icons.add),
-      ),
-
     );
   }
 }
@@ -105,7 +92,7 @@ class RoutineScreen extends StatelessWidget {
         primaryColorDark: Colors.grey[850],
         scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
-      home: RoutineWidget(),
+      home:  RoutineWidget(),
     );
   }
 }

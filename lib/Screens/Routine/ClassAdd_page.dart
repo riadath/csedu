@@ -74,19 +74,20 @@ class _classAdd extends State<classAdd> {
         .size;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(title: const Text('Add A class'),),
       body: Container(
-        padding: const EdgeInsets.all(30),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children:  <Widget>[
-            const SizedBox(height: 20),
+            SizedBox(height: screenSize.height*.008),
             RoundedInputField(
               controller: courseNameController,
               hintText: 'Course Code',
               icon: Icons.class_,
               onChagned: (value) {},
             ),
-            const SizedBox(width: 30,),
+            SizedBox(height: screenSize.height*.01),
             RoundedInputField(
               controller: instructorNameController,
               hintText: 'Instructor Name (short form)',
@@ -112,7 +113,7 @@ class _classAdd extends State<classAdd> {
 
                     },
                 ),
-                const SizedBox(width: 30,),
+                SizedBox(width: screenSize.width*.10),
                 ElevatedButton(
                   child: Text(endTime),
                   onPressed: () async {
@@ -163,7 +164,6 @@ class _classAdd extends State<classAdd> {
                     });
                     errorPrompt = 'Class have been added successfully!';
                     showAlert(errorPrompt, '', context);
-
 
                   }
 

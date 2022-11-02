@@ -1,13 +1,15 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:csedu/Screens/Routine/Routine_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:csedu/Screens/Routine/Routine_page.dart';
 import 'package:flutter/material.dart';
 
 
 String Batch = '27';
-
+String? uid;
 
 
 class RoutineInit extends StatelessWidget{
@@ -15,7 +17,7 @@ class RoutineInit extends StatelessWidget{
   @override
   StatefulWidget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
-    String uid = FirebaseAuth.instance.currentUser!.uid;
+    uid = FirebaseAuth.instance.currentUser!.uid;
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc(uid).get(),
       builder:
@@ -29,7 +31,8 @@ class RoutineInit extends StatelessWidget{
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
           Batch = data['batch'].toString();
-          return RoutineWidget();
+
+         return fun();
         }
         return const Center(
           child: CircularProgressIndicator(),
@@ -51,7 +54,57 @@ String retBatch() {
       final data = doc.data() as Map<String, dynamic>;
       ret = data['batch'].toString();
     },
-    onError: (e) => print('Could not retrive data'),
+    onError: (e) => print('Could not retrieve data'),
   );
   return ret;
+}
+
+
+class myClass {
+  String id;
+  List<String> list;
+  myClass({required this.id, required this.list});
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'mp': list,
+  };
+  static myClass fromJson(Map<String, dynamic> json) => myClass(
+    id: json['id'],
+    list: json['mp'],
+
+  );
+
+}
+
+
+FutureBuilder fun()
+{
+  var ref = FirebaseFirestore.instance.collection('attendance');
+
+  return FutureBuilder<DocumentSnapshot>(
+
+      future: ref.doc(uid).get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot){
+        if(snapshot.hasError){
+          return const Text('SomeThing Error');
+        }
+        if(snapshot.hasData && !snapshot.data!.exists){
+          return RoutineWidget();
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic>? data = snapshot.data!.data() as Map<String, dynamic>?;
+          Map<String, dynamic> value = data?['list']; // <-- The value you want to retrieve.
+
+          value.forEach((key, value) {
+            attendance[key] = <bool>[value[0], value[1]];
+          });
+          return RoutineWidget();
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+  );
 }

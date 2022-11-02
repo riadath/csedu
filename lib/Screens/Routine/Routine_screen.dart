@@ -135,7 +135,17 @@ class _RoutineByDay extends State<RoutineByDay> {
             ),
           ],
         ),
+        floatingActionButton: FloatingActionButton(
 
+          onPressed: (){
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => classAdd(),
+                ));
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
@@ -332,7 +342,7 @@ double calc(String course){
   }
   double res = attend/tot;
 
-  percent = '${(res*100).toStringAsFixed(0)}%';
+  percent = '$attend/$tot ${(res*100).toStringAsFixed(0)}%';
 
   return res;
 }

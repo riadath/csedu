@@ -48,8 +48,12 @@ class DashboardOptions extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RoutineInit(),
-                  ));},
+                    builder: (context) =>  RoutineInit(),
+                  )).then((_){
+                      print('do not touch');
+              });
+              },
+
           ),
           CardCreator(
             screenSize: screenSize,
