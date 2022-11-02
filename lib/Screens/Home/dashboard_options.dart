@@ -1,3 +1,4 @@
+import 'package:csedu/Screens/AlumniProfile/alumni_profile_page.dart';
 import 'package:csedu/Screens/Routine/RountineIndividual/Routine_pageInd.dart';
 import 'package:csedu/StudentProfiles/show_batch_cards.dart';
 import 'package:csedu/StudentProfiles/student_profile_page.dart';
@@ -41,7 +42,13 @@ class DashboardOptions extends StatelessWidget {
               screenSize: screenSize,
               imageUrl: 'images/graduated.png',
               title: 'Alumni Profiles',
-              onPress: () {}),
+              onPress: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AlumniProfilePage(),
+                    ));
+              }),
           CardCreator(
             screenSize: screenSize,
             imageUrl: 'images/class_routine.png',

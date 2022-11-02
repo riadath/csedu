@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 
 class StorageImage {
   final FirebaseStorage storage = FirebaseStorage.instance;

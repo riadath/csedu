@@ -6,12 +6,12 @@ class DatabaseService {
   DatabaseService({required this.uid});
 
   // collection reference
-  final CollectionReference brewCollection =
+  final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('users');
 
   Future<void> updateUserData(String name, String linkedin, int batch,
-      String bloodGroup, bool showData,int roll) async {
-    return await brewCollection.doc(uid).set({
+      String bloodGroup, bool showData, int roll) async {
+    return await userCollection.doc(uid).set({
       'name': name,
       'linkedin': linkedin,
       'batch': batch,
@@ -19,7 +19,7 @@ class DatabaseService {
       'showData': showData,
       'uid': uid,
       'email': FirebaseAuth.instance.currentUser?.email,
-      'roll':roll,
+      'roll': roll,
     });
   }
 }

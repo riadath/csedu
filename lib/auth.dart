@@ -15,7 +15,6 @@ class AuthService {
       User? user = result.user;
       return user;
     } catch (error) {
-      print(error.toString());
       return null;
     }
   }
@@ -30,7 +29,6 @@ class AuthService {
           .updateUserData(name, '', 0, '', false, 0);
       return _userFromFirebaseUser(user);
     } catch (error) {
-      print(error.toString());
       return null;
     }
   }
