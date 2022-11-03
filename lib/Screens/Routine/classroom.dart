@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Classroom{
   String courseName;
   String instructor;
@@ -9,7 +7,6 @@ class Classroom{
   int day;
 
   Classroom({ required this.courseName, required this.instructor, required this.batch, required this.startTime, required this.endTime, required this.day});
-
 
   Map<String, dynamic> toJson() => {
     'courseName': courseName,

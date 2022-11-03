@@ -2,24 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csedu/Constants.dart';
 import 'package:csedu/Screens/Routine/ClassAdd_page.dart';
 import 'package:csedu/Screens/Routine/routineInit.dart';
-import 'package:csedu/StudentProfiles/student_profile_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:csedu/Screens/Routine/classroom.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:csedu/user_model.dart';
-import 'package:csedu/rounded_button.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import '../../StudentProfiles/show_user_profile.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:csedu/Screens/Routine/routineInit.dart';
 
-List<bool> _selected = <bool>[false, false];
 DateTime date = DateTime.now().toLocal();
-
-
-
 
 class RoutineByDay extends StatefulWidget {
   const RoutineByDay({Key? key}) : super(key: key);
@@ -42,6 +30,13 @@ class _RoutineByDay extends State<RoutineByDay> {
     'Friday',
     'Saturday'
   ];
+
+  @override
+  void dispose(){
+    super.dispose();
+
+    FirebaseFirestore.instance.collection('attendance').doc(uid).set({'list' : attendance});
+  }
 
   @override
   Widget build(BuildContext context)  {
@@ -70,7 +65,6 @@ class _RoutineByDay extends State<RoutineByDay> {
 
                             setState(() {
                                     day = date.weekday;
-                                    _selected = <bool>[false, false];
                             });
                           },
                           child: Column(
@@ -148,6 +142,8 @@ class _RoutineByDay extends State<RoutineByDay> {
         ),
       ),
     );
+
+
   }
   Stream<List<Classroom>> readRoutine() {
 
@@ -194,11 +190,7 @@ class _routineCard extends State<routineCard> {
     List<bool>? list = [false, false];
     if(attendance[id] != null) {
       list = attendance[id];
-      //print(attendance[id]);
     }
-    // print('on top');
-    //print(list);
-    // print(id);
     List checkList = [
       {
         "id" : 0,
@@ -252,7 +244,7 @@ class _routineCard extends State<routineCard> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            '${course.courseName} - ${course.batch}' ,
+                            course.courseName,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Lucida Console',
@@ -282,7 +274,7 @@ class _routineCard extends State<routineCard> {
                               fontSize: 15,
                             ),
                           ),
-                          Text('to'),
+                          const Text('to'),
                           Text(
                             course.endTime,
                             style: const TextStyle(

@@ -1,14 +1,10 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csedu/Screens/Routine/Routine_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:csedu/Screens/Routine/Routine_page.dart';
 import 'package:flutter/material.dart';
-
-
-String Batch = '27';
+import 'package:csedu/Screens/Home/dashboard_options.dart';
+String Batch = '';
 String? uid;
 
 
@@ -18,6 +14,7 @@ class RoutineInit extends StatelessWidget{
   StatefulWidget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     uid = FirebaseAuth.instance.currentUser!.uid;
+    dashUid = uid;
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc(uid).get(),
       builder:
@@ -32,13 +29,21 @@ class RoutineInit extends StatelessWidget{
           Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
           Batch = data['batch'].toString();
 
-         return fun();
+          if(Batch == ''){
+            return const AlertDialog(title: Text("Please add your information to see routines"));
+          }
+          return fun();
         }
         return const Center(
           child: CircularProgressIndicator(),
         );
       }
     );
+  }
+
+  static Future<void> save(String? id)
+  async {
+
   }
 
 }
@@ -91,7 +96,7 @@ FutureBuilder fun()
           return const Text('SomeThing Error');
         }
         if(snapshot.hasData && !snapshot.data!.exists){
-          return RoutineWidget();
+          return const RoutineWidget();
         }
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic>? data = snapshot.data!.data() as Map<String, dynamic>?;
@@ -100,7 +105,7 @@ FutureBuilder fun()
           value.forEach((key, value) {
             attendance[key] = <bool>[value[0], value[1]];
           });
-          return RoutineWidget();
+          return const RoutineWidget();
         }
         return const Center(
           child: CircularProgressIndicator(),

@@ -1,9 +1,9 @@
 import 'package:csedu/Screens/Routine/routineInit.dart';
 import 'package:csedu/StudentProfiles/student_profile_page.dart';
-import 'package:csedu/Screens/Routine/Routine_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../StudyMaterials/study_materials_page.dart';
+String? dashUid;
 
 class DashboardOptions extends StatelessWidget {
   const DashboardOptions({
@@ -49,9 +49,7 @@ class DashboardOptions extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>  RoutineInit(),
-                  )).then((_){
-                      print('do not touch');
-              });
+                  ));
               },
 
           ),

@@ -1,10 +1,6 @@
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:csedu/StudentProfiles/student_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:csedu/Screens/Routine/classroom.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:csedu/rounded_button.dart';
 import 'package:intl/intl.dart';
 
 import '../../rounded_input_field.dart';
@@ -13,10 +9,7 @@ class classAdd extends StatefulWidget{
   @override
   State<StatefulWidget> createState() => _classAdd();
 
-  String dropdownvalue = 'Select Days';
-
-  // List of items in our dropdown menu
-
+  String dropDownValue = 'Select Days';
 }
 
 class _classAdd extends State<classAdd> {
@@ -109,8 +102,6 @@ class _classAdd extends State<classAdd> {
                         TimeOfDay time = TimeOfDay.now();
                          time = (await showTimePicker(context: context, initialTime: time))!;
                         startTime = time.format(context);
-                        print(startTime);
-
                     },
                 ),
                 SizedBox(width: screenSize.width*.10),
@@ -120,7 +111,6 @@ class _classAdd extends State<classAdd> {
                     TimeOfDay? time = TimeOfDay.now();
                     time = (await showTimePicker(context: context, initialTime: time))!;
                     endTime = time.format(context);
-
                   },
                 ),
               ],
@@ -164,9 +154,7 @@ class _classAdd extends State<classAdd> {
                     });
                     errorPrompt = 'Class have been added successfully!';
                     showAlert(errorPrompt, '', context);
-
                   }
-
                 }
             ),
           ],

@@ -3,7 +3,6 @@ import 'package:csedu/Constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../Home/navigation_drawer.dart';
-import 'ClassAdd_page.dart';
 
 class RoutineWidget extends StatefulWidget {
   const RoutineWidget({Key? key}) : super(key: key);
@@ -92,7 +91,7 @@ class RoutineScreen extends StatelessWidget {
         primaryColorDark: Colors.grey[850],
         scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
-      home:  RoutineWidget(),
+      home:  const RoutineWidget(),
     );
   }
 }
