@@ -46,23 +46,26 @@ class _pdfviewer extends State<pdfviewer> {
           onRefresh: loadPDFS,
           child: listview(),
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () async {
-            final result = await FilePicker.platform.pickFiles();
-            PlatformFile? pickedFile = result?.files.first;
-            final path = str + pickedFile!.name;
-            print(path);
-            final file = File(pickedFile!.path!);
-            final ref = FirebaseStorage.instance.ref().child(path);
-            ref.putFile(file);
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Uploaded ${pickedFile!.name}')),
-            );
-          },
-          backgroundColor: gPrimaryColor,
-          foregroundColor: gPrimaryColorDark,
-          icon: const Icon(Icons.add),
-          label: const Text('Add'),
+        floatingActionButton: Visibility(
+          visible: FirebaseAuth.instance.currentUser!.email == 'chowdhuryittehad@gmail.com' ? true : false,
+          child: FloatingActionButton.extended(
+            onPressed: () async {
+              final result = await FilePicker.platform.pickFiles();
+              PlatformFile? pickedFile = result?.files.first;
+              final path = str + pickedFile!.name;
+              print(path);
+              final file = File(pickedFile!.path!);
+              final ref = FirebaseStorage.instance.ref().child(path);
+              ref.putFile(file);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Uploaded ${pickedFile!.name}')),
+              );
+            },
+            backgroundColor: gPrimaryColor,
+            foregroundColor: gPrimaryColorDark,
+            icon: const Icon(Icons.add),
+            label: const Text('Add'),
+          ),
         ),
       );
 

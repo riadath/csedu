@@ -72,7 +72,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
-            height: screenSize.height * .11,
+            height: screenSize.height * .02,
           ),
           Image.asset('images/ebook.png'),
           SizedBox(
