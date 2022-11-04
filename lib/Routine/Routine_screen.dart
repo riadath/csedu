@@ -37,9 +37,10 @@ class _RoutineByDay extends State<RoutineByDay> {
     'Saturday',
     'Sunday',
   ];
+  @override
   void initState(){
     super.initState();
-    print('on screen');
+    print('on screeen');
   }
   @override
   void dispose(){

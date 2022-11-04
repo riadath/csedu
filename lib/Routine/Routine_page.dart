@@ -1,18 +1,26 @@
 import 'package:csedu/Routine/ClassAdd_page.dart';
 import 'package:csedu/Routine/Routine_screen.dart';
 import 'package:csedu/Constants.dart';
+import 'package:csedu/Screens/Home/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:csedu/Screens/Home/navigation_drawer.dart';
 
 class RoutineWidget extends StatefulWidget {
   const RoutineWidget({Key? key}) : super(key: key);
-  
+
   @override
   State<RoutineWidget> createState() => _RoutineWidgetIndState();
+
+
 }
 
 class _RoutineWidgetIndState extends State<RoutineWidget> {
+  @override
+  void initState(){
+    super.initState();
+    print('hereeeeeeeeeeee');
+  }
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -92,7 +100,7 @@ class RoutineScreen extends StatelessWidget {
         primaryColorDark: Colors.grey[850],
         scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
-     home:  classAdd(),
+     home:  RoutineByDay(),
     );
   }
 }
