@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
 double percent = -1;
 int downloadIndex = -1;
 CancelToken cancelToken = CancelToken as CancelToken;
@@ -47,7 +46,10 @@ class _pdfviewer extends State<pdfviewer> {
           child: listview(),
         ),
         floatingActionButton: Visibility(
-          visible: FirebaseAuth.instance.currentUser!.email == 'chowdhuryittehad@gmail.com' ? true : false,
+          visible: FirebaseAuth.instance.currentUser!.email ==
+                  'chowdhuryittehad@gmail.com'
+              ? true
+              : false,
           child: FloatingActionButton.extended(
             onPressed: () async {
               final result = await FilePicker.platform.pickFiles();
@@ -117,151 +119,158 @@ class _pdfviewer extends State<pdfviewer> {
   }
 
   Future<void> loadPDFS() async {
-    setState(() {futureFiles = FirebaseStorage.instance.ref(str).listAll();});
+    setState(() {
+      futureFiles = FirebaseStorage.instance.ref(str).listAll();
+    });
   }
 
   FutureBuilder listview() => FutureBuilder<ListResult>(
-    future: futureFiles,
-    builder: (context, snapshot) {
-      if (snapshot.hasData) {
-        final files = snapshot.data!.items;
-        return ListView.builder(
-          itemCount: files.length,
-          itemBuilder: (context, index) {
-            final file = files[index];
-            printUrl(str + file.name);
-            return FirebaseAuth.instance.currentUser!.email == 'chowdhuryittehad@gmail.com' ? Dismissible(
-              direction: DismissDirection.endToStart,
-              key: UniqueKey(),
-              onDismissed: (direction) async {
-               // String str = 'Are you sure you want to delete ' + file.name;
-                showDialog(
-                  context: context,
-                  builder: (ctx) => AlertDialog(
-                    title: const Text("Warning!"),
-                    content: Text('Are you sure you want to delete ' + file.name),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          setState(() async {
-                            String st = await printUrl(str + file.name);
-                            files.removeAt(index);
-                            FirebaseStorage.instance.refFromURL(st).delete();
-                            Navigator.of(ctx).pop();
-
-                          });
+        future: futureFiles,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final files = snapshot.data!.items;
+            return ListView.builder(
+              itemCount: files.length,
+              itemBuilder: (context, index) {
+                final file = files[index];
+                printUrl(str + file.name);
+                return FirebaseAuth.instance.currentUser!.email ==
+                        'chowdhuryittehad@gmail.com'
+                    ? Dismissible(
+                        direction: DismissDirection.endToStart,
+                        key: UniqueKey(),
+                        onDismissed: (direction) async {
+                          // String str = 'Are you sure you want to delete ' + file.name;
+                          showDialog(
+                            context: context,
+                            builder: (ctx) => AlertDialog(
+                              title: const Text("Warning!"),
+                              content: Text('Are you sure you want to delete ' +
+                                  file.name),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    setState(() async {
+                                      String st =
+                                          await printUrl(str + file.name);
+                                      files.removeAt(index);
+                                      FirebaseStorage.instance
+                                          .refFromURL(st)
+                                          .delete();
+                                      Navigator.of(ctx).pop();
+                                    });
+                                  },
+                                  child: Container(
+                                    color: gPrimaryColor,
+                                    padding: const EdgeInsets.all(14),
+                                    child: const Text("YES"),
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(ctx).pop();
+                                    setState(() {});
+                                  },
+                                  child: Container(
+                                    color: gPrimaryColor,
+                                    padding: const EdgeInsets.all(14),
+                                    child: const Text("NO"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
                         },
-                        child: Container(
-                          color: gPrimaryColor,
-                          padding: const EdgeInsets.all(14),
-                          child: const Text("YES"),
+                        background: Container(
+                          color: Colors.red,
+                          child: const Padding(
+                            padding: EdgeInsets.fromLTRB(300.0, 0.0, 0.0, 0.0),
+                            child: Icon(
+                              Icons.delete,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(ctx).pop();
-                          setState(() {});
-                        },
-                        child: Container(
-                          color: gPrimaryColor,
-                          padding: const EdgeInsets.all(14),
-                          child: const Text("NO"),
+                        child: ListTile(
+                          title: Text(file.name),
+                          subtitle: (percent != -1 && downloadIndex == index)
+                              ? LinearProgressIndicator(
+                                  value: percent,
+                                  backgroundColor: Colors.grey,
+                                )
+                              : null,
+                          trailing: Wrap(
+                            spacing: 2,
+                            children: <Widget>[
+                              IconButton(
+                                  icon: const Icon(
+                                    Icons.visibility,
+                                    color: Colors.black,
+                                  ),
+                                  onPressed: () async {
+                                    String st = await printUrl(str + file.name);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => MyHomePage(st),
+                                        ));
+                                  }),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.download,
+                                  color: Colors.black,
+                                ),
+                                onPressed: () async {
+                                  String st = await printUrl(str + file.name);
+                                  return downlaodFile(st, file, index);
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
+                      )
+                    : ListTile(
+                        title: Text(file.name),
+                        subtitle: (percent != -1 && downloadIndex == index)
+                            ? LinearProgressIndicator(
+                                value: percent,
+                                backgroundColor: Colors.grey,
+                              )
+                            : null,
+                        trailing: Wrap(
+                          spacing: 2,
+                          children: <Widget>[
+                            IconButton(
+                                icon: const Icon(
+                                  Icons.visibility,
+                                  color: Colors.black,
+                                ),
+                                onPressed: () async {
+                                  String st = await printUrl(str + file.name);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MyHomePage(st),
+                                      ));
+                                }),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.download,
+                                color: Colors.black,
+                              ),
+                              onPressed: () async {
+                                String st = await printUrl(str + file.name);
+                                return downlaodFile(st, file, index);
+                              },
+                            ),
+                          ],
+                        ),
+                      );
               },
-              background: Container(
-                  color: Colors.red,
-                child: const Padding(
-                  padding: EdgeInsets.fromLTRB(300.0, 0.0, 0.0, 0.0),
-                  child: Icon(Icons.delete,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              child: ListTile(
-                title: Text(file.name),
-                subtitle: (percent != -1 && downloadIndex == index)
-                    ? LinearProgressIndicator(
-                  value: percent,
-                  backgroundColor: Colors.grey,
-                )
-                    : null,
-                trailing: Wrap(
-                  spacing: 2,
-                  children: <Widget>[
-                    IconButton(
-                        icon: const Icon(
-                          Icons.visibility,
-                          color: Colors.black,
-                        ),
-                        onPressed: () async {
-                          String st = await printUrl(str + file.name);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MyHomePage(st),
-                              ));
-                        }),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.download,
-                        color: Colors.black,
-                      ),
-                      onPressed: () async {
-                        String st = await printUrl(str + file.name);
-                        return downlaodFile(st, file, index);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ) : ListTile(
-              title: Text(file.name),
-              subtitle: (percent != -1 && downloadIndex == index)
-                  ? LinearProgressIndicator(
-                value: percent,
-                backgroundColor: Colors.grey,
-              )
-                  : null,
-              trailing: Wrap(
-                spacing: 2,
-                children: <Widget>[
-                  IconButton(
-                      icon: const Icon(
-                        Icons.visibility,
-                        color: Colors.black,
-                      ),
-                      onPressed: () async {
-                        String st = await printUrl(str + file.name);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MyHomePage(st),
-                            ));
-                      }),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.download,
-                      color: Colors.black,
-                    ),
-                    onPressed: () async {
-                      String st = await printUrl(str + file.name);
-                      return downlaodFile(st, file, index);
-                    },
-                  ),
-                ],
-              ),
             );
-          },
-        );
-      } else {
-        return const Center(child: CircularProgressIndicator());
-      }
-    },
-  );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      );
 }
-
-
