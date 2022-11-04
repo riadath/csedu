@@ -65,7 +65,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                 color: Colors.red,
                 fontSize: 15,
               )),
-          SizedBox(height: screenSize.height * 0.04),
+          SizedBox(height: screenSize.height * 0.05),
           const Text(
             'Create Account',
             style: TextStyle(
@@ -92,7 +92,7 @@ class _SignupWidgetState extends State<SignupWidget> {
             controller: confirmPasswordController,
             hintText: 'Confirm Password',
           ),
-          SizedBox(height: screenSize.height * 0.01),
+          SizedBox(height: screenSize.height * 0.05),
           RoundedButton(
               buttonText: 'Sign Up',
               onPress: () async {
