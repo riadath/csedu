@@ -7,6 +7,7 @@ import 'package:csedu/StudyMaterials/study_material_drawer.dart';
 import 'package:flutter/material.dart';
 
 import '../../StudyMaterials/study_materials_page.dart';
+
 String? dashUid;
 
 class DashboardOptions extends StatelessWidget {
@@ -53,14 +54,13 @@ class DashboardOptions extends StatelessWidget {
             screenSize: screenSize,
             imageUrl: 'images/class_routine.png',
             title: 'Class Routine',
-            onPress: ()  {
+            onPress: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>  RoutineInit(),
+                    builder: (context) => RoutineInit(),
                   ));
-              },
-
+            },
           ),
           CardCreator(
             screenSize: screenSize,
