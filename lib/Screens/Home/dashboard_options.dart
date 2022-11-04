@@ -1,4 +1,4 @@
-import 'package:csedu/Screens/Routine/routineInit.dart';
+import 'package:csedu/Routine/routineInit.dart';
 import 'package:csedu/StudentProfiles/student_profile_page.dart';
 import 'package:flutter/material.dart';
 

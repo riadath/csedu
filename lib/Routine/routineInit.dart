@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:csedu/Screens/Routine/Routine_screen.dart';
+import 'package:csedu/Routine/Routine_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:csedu/Screens/Routine/Routine_page.dart';
+import 'package:csedu/Routine/Routine_page.dart';
 import 'package:flutter/material.dart';
 import 'package:csedu/Screens/Home/dashboard_options.dart';
 String Batch = '';
@@ -30,7 +30,7 @@ class RoutineInit extends StatelessWidget{
           Batch = data['batch'].toString();
 
           if(Batch == ''){
-            return const AlertDialog(title: Text("Please add your information to see routines"));
+            return const AlertDialog(title: Text("Please add your information to see routines"), shape: OutlineInputBorder(),);
           }
           return fun();
         }

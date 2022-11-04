@@ -1,8 +1,8 @@
-import 'package:csedu/Screens/Routine/Routine_screen.dart';
+import 'package:csedu/Routine/Routine_screen.dart';
 import 'package:csedu/Constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../Home/navigation_drawer.dart';
+import 'package:csedu/Screens/Home/navigation_drawer.dart';
 
 class RoutineWidget extends StatefulWidget {
   const RoutineWidget({Key? key}) : super(key: key);
