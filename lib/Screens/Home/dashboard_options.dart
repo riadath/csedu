@@ -1,13 +1,13 @@
 import 'package:csedu/Screens/AlumniProfile/alumni_profile_page.dart';
-import 'package:csedu/Screens/Routine/RountineIndividual/Routine_pageInd.dart';
+import 'package:csedu/Routine/routineInit.dart';
 import 'package:csedu/StudentProfiles/show_batch_cards.dart';
 import 'package:csedu/StudentProfiles/student_profile_page.dart';
-import 'package:csedu/Screens/Routine/Routine_page.dart';
 import 'package:csedu/StudyMaterials/pdf_viewer_page.dart';
 import 'package:csedu/StudyMaterials/study_material_drawer.dart';
 import 'package:flutter/material.dart';
 
 import '../../StudyMaterials/study_materials_page.dart';
+String? dashUid;
 
 class DashboardOptions extends StatelessWidget {
   const DashboardOptions({
@@ -53,13 +53,14 @@ class DashboardOptions extends StatelessWidget {
             screenSize: screenSize,
             imageUrl: 'images/class_routine.png',
             title: 'Class Routine',
-            onPress: () {
+            onPress: ()  {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const RoutineWidget(),
+                    builder: (context) =>  RoutineInit(),
                   ));
-            },
+              },
+
           ),
           CardCreator(
             screenSize: screenSize,

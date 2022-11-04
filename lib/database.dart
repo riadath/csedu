@@ -22,4 +22,20 @@ class DatabaseService {
       'roll': roll,
     });
   }
+  static String retBatch(){
+    String ret = '';
+    final CollectionReference _usersRef =
+    FirebaseFirestore.instance.collection('users');
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+    final docRef = _usersRef.doc(uid);
+    docRef.get().then(
+          (DocumentSnapshot doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        ret = data['batch'].toString();
+      },
+      onError: (e) => print('Could not retrive data'),
+    );
+    print(ret);
+    return ret;
+  }
 }

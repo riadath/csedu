@@ -1,9 +1,8 @@
-import 'package:csedu/Screens/Routine/RountineIndividual/Routine_Ind.dart';
-import 'package:csedu/Screens/Routine/Routine_screen.dart';
+import 'package:csedu/Routine/Routine_screen.dart';
 import 'package:csedu/Constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'navigation_drawer.dart';
+import 'package:csedu/Screens/Home/navigation_drawer.dart';
 
 class RoutineWidget extends StatefulWidget {
   const RoutineWidget({Key? key}) : super(key: key);
@@ -17,8 +16,9 @@ class _RoutineWidgetIndState extends State<RoutineWidget> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      drawer: NavigationDrawer(),
+      drawer: const NavigationDrawer(),
       appBar: AppBar(
+        elevation: 0,
         iconTheme: const IconThemeData(color: gPrimaryColorDark),
         backgroundColor: gPrimaryColor,
         title:
@@ -34,9 +34,9 @@ class _RoutineWidgetIndState extends State<RoutineWidget> {
         ],
       ),
 
-      body: const Center(
+      body:  const Center(
         child: Background(
-          child: RoutinesAllBatch(),
+          child: RoutineByDay(),
         ),
       ),
     );
@@ -91,7 +91,7 @@ class RoutineScreen extends StatelessWidget {
         primaryColorDark: Colors.grey[850],
         scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
-      home: RoutineWidget(),
+      home:  RoutineWidget(),
     );
   }
 }
