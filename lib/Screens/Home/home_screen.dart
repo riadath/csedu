@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
         primaryColorDark: Colors.grey[850],
         scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
-      home: const HomeWidget(),
+      home: HomeWidget(),
     );
   }
 }

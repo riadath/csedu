@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:csedu/Routine/Routine_page.dart';
 import 'package:flutter/material.dart';
 import 'package:csedu/Screens/Home/dashboard_options.dart';
+import 'package:csedu/Routine/Routine_screen.dart';
 String Batch = '';
 String? uid;
 
@@ -96,7 +97,7 @@ FutureBuilder fun()
           return const Text('SomeThing Error');
         }
         if(snapshot.hasData && !snapshot.data!.exists){
-          return const RoutineWidget();
+          return  RoutineWidget();
         }
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic>? data = snapshot.data!.data() as Map<String, dynamic>?;
@@ -105,7 +106,7 @@ FutureBuilder fun()
           value.forEach((key, value) {
             attendance[key] = <bool>[value[0], value[1]];
           });
-          return const RoutineWidget();
+          return  RoutineWidget();
         }
         return const Center(
           child: CircularProgressIndicator(),

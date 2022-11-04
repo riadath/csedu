@@ -50,6 +50,7 @@ class _RoutineByDay extends State<RoutineByDay> {
 
     Size screenSize = MediaQuery.of(context).size;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Routine',
       theme: ThemeData(
         primaryColor: gPrimaryColor,
@@ -58,7 +59,7 @@ class _RoutineByDay extends State<RoutineByDay> {
         scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
       home: Scaffold(
-
+        resizeToAvoidBottomInset: false,
         body: Stack(
           children: <Widget>[
             Container(
@@ -178,7 +179,7 @@ class _RoutineByDay extends State<RoutineByDay> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => classAdd(),
+                    builder: (context) =>  classAdd(),
                   ));
             },
             backgroundColor: gPrimaryColor,
