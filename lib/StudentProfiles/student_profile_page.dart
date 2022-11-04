@@ -91,7 +91,8 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
         .map((snapshot) => snapshot.docs
             .map((doc) => UserModel.fromJson(doc.data()))
             .where((element) =>
-                element.name.toLowerCase().contains(search.toLowerCase()))
+                element.name.toLowerCase().contains(search.toLowerCase()) ||
+                element.bloodGroup.toLowerCase().contains(search.toLowerCase()))
             .toList());
   }
 
@@ -101,6 +102,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
         color: Colors.grey[300],
         child: ListTile(
           leading: CircleAvatar(child: Text('${user.roll}')),
+          trailing: CircleAvatar(child: Text(user.bloodGroup)),
           title: Text(user.name),
           onTap: () {
             Navigator.push(

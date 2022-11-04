@@ -15,6 +15,7 @@ class VerifyEmailPage extends StatefulWidget {
 
 class _VerifyEmailPageState extends State<VerifyEmailPage> {
   bool isVerified = false;
+  bool canResend = false;
   Timer? timer;
 
   @override
@@ -33,7 +34,20 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
   }
 
   Future sendVerificationEmail() async {
-    await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+    try {
+      await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+      setState(() {
+        canResend = false;
+      });
+      await Future.delayed(const Duration(seconds: 5));
+      setState(() {
+        canResend = true;
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(e.toString()),
+      ));
+    }
   }
 
   Future checkEmailVerified() async {
@@ -78,8 +92,8 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                 ),
                 RoundedButton(
                   buttonText: 'Resend Email',
-                  onPress: () {},
                   textColor: gPrimaryColorDark,
+                  onPress: () => canResend ? sendVerificationEmail() : null,
                 )
               ],
             )),

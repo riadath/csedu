@@ -22,7 +22,7 @@ class _BackgroundState extends State<Background> {
         alignment: Alignment.center,
         children: [
           Container(
-            color: Colors.grey.shade500,
+            color: Colors.grey[900],
             width: MediaQuery.of(context).size.width,
             // decoration: const BoxDecoration(
             //   image: DecorationImage(
