@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:csedu/Routine/ClassAdd_page.dart';
 import 'package:csedu/Routine/Routine_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:csedu/Routine/Routine_page.dart';
@@ -24,7 +25,8 @@ class RoutineInit extends StatelessWidget{
           return const Text('SomeThing Error');
         }
         if(snapshot.hasData && !snapshot.data!.exists){
-          return const Text('No data');
+          Batch = '';
+          return fun();
         }
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
@@ -106,7 +108,7 @@ FutureBuilder fun()
           value.forEach((key, value) {
             attendance[key] = <bool>[value[0], value[1]];
           });
-          return  RoutineWidget();
+          return RoutineWidget();
         }
         return const Center(
           child: CircularProgressIndicator(),

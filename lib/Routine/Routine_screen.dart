@@ -21,6 +21,9 @@ class RoutineByDay extends StatefulWidget {
 int cnt = 0;
 class _RoutineByDay extends State<RoutineByDay> {
 
+  @override
+
+
   int day = DateTime.now().toLocal().weekday;
 
   String? curBatch = Batch;
@@ -36,7 +39,7 @@ class _RoutineByDay extends State<RoutineByDay> {
   ];
   void initState(){
     super.initState();
-    cnt = 1;
+    print('on screen');
   }
   @override
   void dispose(){

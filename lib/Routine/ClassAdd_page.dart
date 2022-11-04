@@ -8,7 +8,7 @@ import 'package:csedu/Constants.dart';
 import '../../rounded_input_field.dart';
 import '../Screens/Home/navigation_drawer.dart';
 
-class classAdd extends StatefulWidget{
+class classAdd extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _classAdd();
 
@@ -16,10 +16,12 @@ class classAdd extends StatefulWidget{
 }
 
 class _classAdd extends State<classAdd> {
-  void intiState(){
+  @override
+  void initState() {
     super.initState();
     print('here');
   }
+
   final courseNameController = TextEditingController();
   final instructorNameController = TextEditingController();
   final batchController = TextEditingController();
@@ -29,13 +31,13 @@ class _classAdd extends State<classAdd> {
 
   List<String> _selectedItems = [];
   Map<String, int> weekDay = {
-    'Sunday' : 7,
-    'Monday' : 1,
-    'Tuesday' : 2,
-    'Wednesday' : 3,
-    'Thursday' : 4,
-    'Friday' : 5,
-    'Saturday' : 6,
+    'Sunday': 7,
+    'Monday': 1,
+    'Tuesday': 2,
+    'Wednesday': 3,
+    'Thursday': 4,
+    'Friday': 5,
+    'Saturday': 6,
   };
 
   void _showMultiSelect() async {
@@ -66,32 +68,26 @@ class _classAdd extends State<classAdd> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery
-        .of(context)
-        .size;
+    Size screenSize = MediaQuery.of(context).size;
 
     return MaterialApp(
-
       theme: ThemeData(
         primaryColor: gPrimaryColor,
         primaryColorLight: gPrimaryColor,
         primaryColorDark: Colors.grey[850],
         scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
-
       home: Scaffold(
-
         resizeToAvoidBottomInset: false,
         drawer: const NavigationDrawer(),
         appBar: AppBar(
           elevation: 0,
           iconTheme: const IconThemeData(color: gPrimaryColorDark),
           backgroundColor: gPrimaryColor,
-          title:
-          const Text("Add A class", style: TextStyle(color: gPrimaryColorDark)),
+          title: const Text("Add A class",
+              style: TextStyle(color: gPrimaryColorDark)),
           actions: [
             IconButton(
               onPressed: () => FirebaseAuth.instance.signOut(),
@@ -117,15 +113,15 @@ class _classAdd extends State<classAdd> {
             Container(
               padding: const EdgeInsets.all(20),
               child: Column(
-                children:  <Widget>[
-                  SizedBox(height: screenSize.height*.008),
+                children: <Widget>[
+                  SizedBox(height: screenSize.height * .008),
                   RoundedInputField(
                     controller: courseNameController,
                     hintText: 'Course Code : CSE-1101',
                     icon: Icons.class_,
                     onChagned: (value) {},
                   ),
-                  SizedBox(height: screenSize.height*.01),
+                  SizedBox(height: screenSize.height * .01),
                   RoundedInputField(
                     controller: instructorNameController,
                     hintText: 'Instructor Name (short form)',
@@ -144,34 +140,36 @@ class _classAdd extends State<classAdd> {
                       ElevatedButton(
                           onPressed: () async {
                             TimeOfDay time = TimeOfDay.now();
-                            time = (await showTimePicker(context: context, initialTime: time))!;
+                            time = (await showTimePicker(
+                                context: context, initialTime: time))!;
                             startTime = time.format(context);
-                            setState(() {
-
-                            });
+                            setState(() {});
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: gPrimaryColor,
                             fixedSize: Size(100, 15),
                           ),
-                          child: Text(startTime, style: const TextStyle(color: gPrimaryColorDark),)
-                      ),
-                      SizedBox(width: screenSize.width*.10),
+                          child: Text(
+                            startTime,
+                            style: const TextStyle(color: gPrimaryColorDark),
+                          )),
+                      SizedBox(width: screenSize.width * .10),
                       ElevatedButton(
                           onPressed: () async {
                             TimeOfDay? time = TimeOfDay.now();
-                            time = (await showTimePicker(context: context, initialTime: time))!;
+                            time = (await showTimePicker(
+                                context: context, initialTime: time))!;
                             endTime = time.format(context);
-                            setState(() {
-
-                            });
+                            setState(() {});
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: gPrimaryColor,
                             fixedSize: const Size(100, 15),
                           ),
-                          child: Text(endTime, style: const TextStyle(color: gPrimaryColorDark),)
-                      ),
+                          child: Text(
+                            endTime,
+                            style: const TextStyle(color: gPrimaryColorDark),
+                          )),
                     ],
                   ),
                   ElevatedButton(
@@ -180,39 +178,53 @@ class _classAdd extends State<classAdd> {
                       backgroundColor: gPrimaryColor,
                       fixedSize: const Size(150, 15),
                     ),
-                    child: const Text('Select Days', style: TextStyle(color: gPrimaryColorDark),),
+                    child: const Text(
+                      'Select Days',
+                      style: TextStyle(color: gPrimaryColorDark),
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      if(courseNameController.text.isEmpty){
+                      if (courseNameController.text.isEmpty) {
                         errorPrompt = 'Course name cannot be empty';
-                        showAlert('class could''t be created!', errorPrompt, context);
+                        showAlert('class could' 't be created!', errorPrompt,
+                            context);
                         print(errorPrompt);
-                      }
-                      else if(instructorNameController.text.isEmpty){
+                      } else if (instructorNameController.text.isEmpty) {
                         errorPrompt = 'instructor name cannot be empty';
-                        showAlert('class could''t be created!', errorPrompt, context);
-                      }
-                      else if(batchController.text.isEmpty){
+                        showAlert('class could' 't be created!', errorPrompt,
+                            context);
+                      } else if (batchController.text.isEmpty) {
                         errorPrompt = 'Batch number cannot be empty';
-                        showAlert('class could''t be created!', errorPrompt, context);
-                      }
-                      else if(_selectedItems.isEmpty){
+                        showAlert('class could' 't be created!', errorPrompt,
+                            context);
+                      } else if (_selectedItems.isEmpty) {
                         errorPrompt = 'Select  at least one day';
-                        showAlert('class could''t be created!', errorPrompt, context);
-                      }
-                      else if(startTime == 'start at' || endTime == 'end at' || !getTime(startTime, endTime)){
+                        showAlert('class could' 't be created!', errorPrompt,
+                            context);
+                      } else if (startTime == 'start at' ||
+                          endTime == 'end at' ||
+                          !getTime(startTime, endTime)) {
                         errorPrompt = 'Invalid time';
-                        showAlert('class could''t be created!', errorPrompt, context);
-                      }
-                      else{
+                        showAlert('class could' 't be created!', errorPrompt,
+                            context);
+                      } else {
+                        _selectedItems.forEach((element) {
+                          Classroom cls = Classroom(
+                              courseName: courseNameController.text
+                                  .trim()
+                                  .toUpperCase(),
+                              instructor: instructorNameController.text
+                                  .trim()
+                                  .toUpperCase(),
+                              batch: batchController.text.trim(),
+                              startTime: startTime!,
+                              endTime: endTime!,
+                              day: weekDay[element]!);
 
-                        _selectedItems.forEach((element)
-                        {
-                          Classroom cls = Classroom(courseName: courseNameController.text.trim().toUpperCase(), instructor: instructorNameController.text.trim().toUpperCase(),
-                              batch: batchController.text.trim(), startTime: startTime!, endTime: endTime!, day: weekDay[element]!);
-
-                          FirebaseFirestore.instance.collection('routines').add(cls.toJson());
+                          FirebaseFirestore.instance
+                              .collection('routines')
+                              .add(cls.toJson());
                         });
                         errorPrompt = 'Class have been added successfully!';
                         showAlert(errorPrompt, '', context);
@@ -222,7 +234,8 @@ class _classAdd extends State<classAdd> {
                       backgroundColor: gPrimaryColor,
                       fixedSize: const Size(10, 15),
                     ),
-                    child: const Text('Add', style: TextStyle(color: gPrimaryColorDark)),
+                    child: const Text('Add',
+                        style: TextStyle(color: gPrimaryColorDark)),
                   ),
                 ],
               ),
@@ -275,11 +288,11 @@ class _MultiSelectState extends State<MultiSelect> {
         child: ListBody(
           children: widget.items
               .map((item) => CheckboxListTile(
-            value: _selectedItems.contains(item),
-            title: Text(item),
-            controlAffinity: ListTileControlAffinity.leading,
-            onChanged: (isChecked) => _itemChange(item, isChecked!),
-          ))
+                    value: _selectedItems.contains(item),
+                    title: Text(item),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    onChanged: (isChecked) => _itemChange(item, isChecked!),
+                  ))
               .toList(),
         ),
       ),
@@ -295,10 +308,9 @@ class _MultiSelectState extends State<MultiSelect> {
       ],
     );
   }
-
-
 }
-void showAlert(String title, String text, BuildContext context){
+
+void showAlert(String title, String text, BuildContext context) {
   AlertDialog alert = AlertDialog(
     title: Text(title),
     content: Text(text),
@@ -322,8 +334,8 @@ getTime(String st, String end) {
   TimeOfDay t2 = stringToTimeOfDay(end);
   int startTimeInt = (t1.hour * 60 + t2.minute) * 60;
   int EndTimeInt = (t2.hour * 60 + t2.minute) * 60;
-  if(st[st.length - 2] == 'P') startTimeInt += 12*60;
-  if(end[end.length - 2] == 'P') EndTimeInt += 12*60;
+  if (st[st.length - 2] == 'P') startTimeInt += 12 * 60;
+  if (end[end.length - 2] == 'P') EndTimeInt += 12 * 60;
   int dif = EndTimeInt - startTimeInt;
   print(startTimeInt);
   print(EndTimeInt);

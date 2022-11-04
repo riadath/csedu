@@ -1,12 +1,8 @@
 import 'package:csedu/Screens/AlumniProfile/alumni_profile_page.dart';
 import 'package:csedu/Routine/routineInit.dart';
 import 'package:csedu/StudentProfiles/show_batch_cards.dart';
-import 'package:csedu/StudentProfiles/student_profile_page.dart';
-import 'package:csedu/StudyMaterials/pdf_viewer_page.dart';
 import 'package:csedu/StudyMaterials/study_material_drawer.dart';
 import 'package:flutter/material.dart';
-
-import '../../StudyMaterials/study_materials_page.dart';
 
 String? dashUid;
 
