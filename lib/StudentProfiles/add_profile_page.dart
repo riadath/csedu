@@ -94,14 +94,14 @@ class _AddProfileWidgetState extends State<AddProfileWidget> {
                 color: Colors.red,
                 fontSize: 15,
               )),
-          SizedBox(height: screenSize.height * 0.1),
+          SizedBox(height: screenSize.height * 0.02),
           const Text(
             'Additional Info',
             style: TextStyle(
               fontSize: 23,
             ),
           ),
-          SizedBox(height: screenSize.height * 0.05),
+          SizedBox(height: screenSize.height * 0.01),
           ElevatedButton.icon(
             label: const Text('Upload Pofile Photo'),
             icon: const Icon(Icons.image),

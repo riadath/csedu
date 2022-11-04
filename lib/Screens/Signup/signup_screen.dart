@@ -1,3 +1,4 @@
+import 'package:csedu/Screens/Signup/verify_email_page.dart';
 import 'package:csedu/rounded_button.dart';
 import 'package:csedu/rounded_input_field.dart';
 import 'package:csedu/rounded_password_field.dart';
@@ -24,7 +25,7 @@ class Background extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.fitHeight,
-                image: AssetImage('images/vectorWave0.jpg'),
+                image: AssetImage('images/vectorWave1.jpg'),
               ),
             ),
           ),
@@ -58,13 +59,13 @@ class _SignupWidgetState extends State<SignupWidget> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(height: screenSize.height * 0.1),
+          SizedBox(height: screenSize.height * 0.05),
           Text(errorMessage,
               style: const TextStyle(
                 color: Colors.red,
                 fontSize: 15,
               )),
-          SizedBox(height: screenSize.height * 0.1),
+          SizedBox(height: screenSize.height * 0.04),
           const Text(
             'Create Account',
             style: TextStyle(
@@ -91,12 +92,12 @@ class _SignupWidgetState extends State<SignupWidget> {
             controller: confirmPasswordController,
             hintText: 'Confirm Password',
           ),
-          SizedBox(height: screenSize.height * 0.1),
+          SizedBox(height: screenSize.height * 0.01),
           RoundedButton(
               buttonText: 'Sign Up',
               onPress: () async {
-                bool if_valid = validateInputs();
-                if (!if_valid) {
+                bool ifValid = validateInputs();
+                if (!ifValid) {
                   setState(() {});
                 }
                 dynamic result = await _auth.registerWithEmailAndPassword(
@@ -139,10 +140,13 @@ class _SignupWidgetState extends State<SignupWidget> {
   }
 
   void switchScreen() {
-    _auth.signIn(emailController.text.trim(), passwordController.text.trim());
     emailController.clear();
     passwordController.clear();
-    Navigator.pop(context);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const VerifyEmailPage(),
+        ));
   }
 }
 

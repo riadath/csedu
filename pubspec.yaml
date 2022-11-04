@@ -54,6 +54,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^2.2.13
+
+
 
 #   flutter_launcher_icons: ^0.10.0 
 
@@ -83,6 +86,9 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
+flutter_native_splash:
+  color: "#f5cb42"
+  image: images/graduated.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

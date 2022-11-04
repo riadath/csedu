@@ -23,6 +23,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'student profile page',
       theme: ThemeData(
         primaryColor: gPrimaryColor,

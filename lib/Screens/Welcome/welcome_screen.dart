@@ -80,7 +80,6 @@ class Background extends StatelessWidget {
   }
 }
 
-
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
   @override
@@ -91,9 +90,9 @@ class WelcomeScreen extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return HomeScreen();
+              return const HomeScreen();
             } else {
-              return WelcomeWidget();
+              return const WelcomeWidget();
             }
           }),
     );

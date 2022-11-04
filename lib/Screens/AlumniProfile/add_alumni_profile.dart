@@ -67,12 +67,6 @@ class _AddAlumniProfileState extends State<AddAlumniProfile> {
     super.dispose();
   }
 
-  @override
-  void initState() {
-    setState(() {});
-    super.initState();
-  }
-
   final CollectionReference _usersRef =
       FirebaseFirestore.instance.collection('alumni');
 
@@ -98,7 +92,7 @@ class _AddAlumniProfileState extends State<AddAlumniProfile> {
                 color: gPrimaryColorLight,
               ),
             ),
-            SizedBox(height: screenSize.height * 0.05),
+            SizedBox(height: screenSize.height * 0.01),
             // ElevatedButton.icon(
             //   label: const Text('Upload Pofile Photo'),
             //   icon: const Icon(Icons.image),

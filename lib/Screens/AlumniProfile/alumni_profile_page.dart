@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csedu/Constants.dart';
 import 'package:csedu/Screens/AlumniProfile/add_alumni_profile.dart';
+import 'package:csedu/Screens/AlumniProfile/show_alumni_profile.dart';
 import 'package:csedu/alumni_model.dart';
 import 'package:csedu/rounded_input_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AlumniProfilePage extends StatefulWidget {
@@ -18,9 +20,11 @@ class _AlumniProfilePageState extends State<AlumniProfilePage> {
   Icon tIcon = const Icon(Icons.search);
   Widget searchBar = const Text('');
   final searchbarController = TextEditingController();
+  final uid = FirebaseAuth.instance.currentUser!.uid;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'student profile page',
       theme: ThemeData(
         primaryColor: gPrimaryColor,
@@ -74,18 +78,23 @@ class _AlumniProfilePageState extends State<AlumniProfilePage> {
             }
           }),
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const AddAlumniProfile(),
-                ));
-          },
-          backgroundColor: gPrimaryColor,
-          foregroundColor: gPrimaryColorDark,
-          icon: const Icon(Icons.add),
-          label: const Text('Add'),
+        floatingActionButton: Visibility(
+          visible: (uid == "9rlStwuDEzPP3wzQjbRNrNDOxte2"),
+          child: FloatingActionButton.extended(
+            onPressed: () {
+              if (uid == "9rlStwuDEzPP3wzQjbRNrNDOxte2") {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AddAlumniProfile(),
+                    ));
+              }
+            },
+            backgroundColor: gPrimaryColor,
+            foregroundColor: gPrimaryColorDark,
+            icon: const Icon(Icons.add),
+            label: const Text('Add'),
+          ),
         ),
       ),
     );
@@ -107,7 +116,19 @@ class _AlumniProfilePageState extends State<AlumniProfilePage> {
         child: ListTile(
           leading: CircleAvatar(child: Text('${user.batch}')),
           title: Text(user.name),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfileCardAlumni(
+                    name: user.name,
+                    email: user.email,
+                    batch: user.batch.toString(),
+                    bloodGroup: user.bloodGroup,
+                    linkedin: user.linkedin,
+                  ),
+                ));
+          },
           // subtitle: Text(user.linkedin),
         ),
       );
