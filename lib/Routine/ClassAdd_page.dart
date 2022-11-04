@@ -16,7 +16,10 @@ class classAdd extends StatefulWidget{
 }
 
 class _classAdd extends State<classAdd> {
-
+  void intiState(){
+    super.initState();
+    print('here');
+  }
   final courseNameController = TextEditingController();
   final instructorNameController = TextEditingController();
   final batchController = TextEditingController();
@@ -80,6 +83,7 @@ class _classAdd extends State<classAdd> {
       ),
 
       home: Scaffold(
+
         resizeToAvoidBottomInset: false,
         drawer: const NavigationDrawer(),
         appBar: AppBar(
@@ -266,7 +270,7 @@ class _MultiSelectState extends State<MultiSelect> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Select Topics'),
+      title: const Text('Select Days'),
       content: SingleChildScrollView(
         child: ListBody(
           children: widget.items
