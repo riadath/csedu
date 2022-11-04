@@ -50,6 +50,7 @@ dependencies:
   percent_indicator: ^4.2.2
   pdf: ^3.8.4
   pull_to_refresh: ^2.0.0
+  flutter_native_splash: ^2.2.13
 
 
 
@@ -95,7 +96,8 @@ flutter:
 
 flutter_native_splash:
   color: "#f5cb42"
-  image: images/graduated.png
+  image: images/learn.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

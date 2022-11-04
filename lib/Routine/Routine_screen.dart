@@ -175,22 +175,22 @@ class _RoutineByDay extends State<RoutineByDay> {
           ],
         ),
 
-        floatingActionButton: Visibility(
-          visible: true,
-          child: FloatingActionButton.extended(
-            onPressed: ()  {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>  classAdd(),
-                  ));
-            },
-            backgroundColor: gPrimaryColor,
-            foregroundColor: gPrimaryColorDark,
-            icon: const Icon(Icons.add),
-            label: const Text('Add'),
-          ),
-        ),
+        // floatingActionButton: Visibility(
+        //   visible: true,
+        //   child: FloatingActionButton.extended(
+        //     onPressed: ()  {
+        //       Navigator.push(
+        //           context,
+        //           MaterialPageRoute(
+        //             builder: (context) =>  classAdd(),
+        //           ));
+        //     },
+        //     backgroundColor: gPrimaryColor,
+        //     foregroundColor: gPrimaryColorDark,
+        //     icon: const Icon(Icons.add),
+        //     label: const Text('Add'),
+        //   ),
+        // ),
       ),
     );
 

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:csedu/Routine/ClassAdd_page.dart';
 import 'package:csedu/StudentProfiles/add_profile_page.dart';
 import 'package:csedu/Constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -111,7 +112,13 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 ));
               }),
           buildNavbarItems(
-              icon: Icons.notifications, text: "Notifications", onTap: () {}),
+              icon: Icons.add, text: "Add class", onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => classAdd(),
+                ));
+          }),
           buildNavbarItems(
               icon: Icons.settings, text: "Settings", onTap: () {}),
           const SizedBox(height: 20),

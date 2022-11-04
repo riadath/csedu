@@ -49,7 +49,7 @@ class DashboardOptions extends StatelessWidget {
           CardCreator(
             screenSize: screenSize,
             imageUrl: 'images/class_routine.png',
-            title: 'Class Routine',
+            title: 'Class Schedule',
             onPress: () {
               Navigator.push(
                   context,
