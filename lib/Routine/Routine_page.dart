@@ -1,3 +1,4 @@
+import 'package:csedu/Routine/ClassAdd_page.dart';
 import 'package:csedu/Routine/Routine_screen.dart';
 import 'package:csedu/Constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -91,7 +92,7 @@ class RoutineScreen extends StatelessWidget {
         primaryColorDark: Colors.grey[850],
         scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
-      home:  RoutineWidget(),
+     home:  classAdd(),
     );
   }
 }

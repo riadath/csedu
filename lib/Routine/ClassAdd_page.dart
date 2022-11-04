@@ -16,7 +16,8 @@ class classAdd extends StatefulWidget{
 }
 
 class _classAdd extends State<classAdd> {
-  void intiState(){
+  @override
+  void initState(){
     super.initState();
     print('here');
   }
@@ -138,6 +139,7 @@ class _classAdd extends State<classAdd> {
                     icon: Icons.people,
                     onChagned: (value) {},
                   ),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
