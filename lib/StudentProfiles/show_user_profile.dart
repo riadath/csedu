@@ -22,7 +22,7 @@ class _BackgroundState extends State<Background> {
         alignment: Alignment.center,
         children: [
           Container(
-            color: Colors.grey[900],
+            color: Colors.blueGrey[700],
             width: MediaQuery.of(context).size.width,
             // decoration: const BoxDecoration(
             //   image: DecorationImage(
@@ -71,7 +71,7 @@ class _ProfileCardState extends State<ProfileCard> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(height: 100),
+              const SizedBox(height: 30),
               FutureBuilder(
                 future: image.downloadURL(widget.uid),
                 builder: (context, snapshot) {

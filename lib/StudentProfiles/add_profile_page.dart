@@ -204,7 +204,7 @@ class _AddProfileWidgetState extends State<AddProfileWidget> {
     } catch (e) {
       return false;
     }
-    if (bno > 27 && bno < 24) {
+    if (bno > 28 && bno < 24) {
       errorMessage = "Invalid Batch Number";
       return false;
     }

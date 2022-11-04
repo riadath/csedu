@@ -99,7 +99,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
   Widget buildUser(UserModel user) => Card(
         margin: const EdgeInsets.all(5),
         shadowColor: Colors.lime,
-        color: Colors.grey[300],
+        color: Colors.blueGrey[200],
         child: ListTile(
           leading: CircleAvatar(child: Text('${user.roll}')),
           trailing: CircleAvatar(child: Text(user.bloodGroup)),
