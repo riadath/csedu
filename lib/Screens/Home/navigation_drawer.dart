@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:csedu/Routine/ClassAdd_page.dart';
 import 'package:csedu/StudentProfiles/add_profile_page.dart';
 import 'package:csedu/Constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -106,6 +107,14 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               icon: Icons.notifications, text: "Notifications", onTap: () {}),
           buildNavbarItems(
               icon: Icons.settings, text: "Settings", onTap: () {}),
+          buildNavbarItems(
+              icon: Icons.add, text: "Add a class", onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => classAdd(),
+                ));
+          }),
           const SizedBox(height: 20),
           const Divider(
             color: gPrimaryColorLight,

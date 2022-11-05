@@ -128,6 +128,7 @@ class _classAdd extends State<classAdd> {
                   ),
                   SizedBox(height: screenSize.height*.01),
                   RoundedInputField(
+
                     controller: instructorNameController,
                     hintText: 'Instructor Name (short form)',
                     icon: Icons.person,

@@ -12,6 +12,16 @@ import 'package:csedu/Constants.dart';
 
 DateTime date = DateTime.now().toLocal();
 
+final List<String> weekDays = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
+];
+
 class RoutineByDay extends StatefulWidget {
   const RoutineByDay({Key? key}) : super(key: key);
 
@@ -28,15 +38,7 @@ class _RoutineByDay extends State<RoutineByDay> {
 
   String? curBatch = Batch;
 
-  final List<String> weekDays = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ];
+
   @override
   void initState(){
     super.initState();
@@ -176,22 +178,22 @@ class _RoutineByDay extends State<RoutineByDay> {
           ],
         ),
 
-        floatingActionButton: Visibility(
-          visible: true,
-          child: FloatingActionButton.extended(
-            onPressed: ()  {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>  classAdd(),
-                  ));
-            },
-            backgroundColor: gPrimaryColor,
-            foregroundColor: gPrimaryColorDark,
-            icon: const Icon(Icons.add),
-            label: const Text('Add'),
-          ),
-        ),
+        // floatingActionButton: Visibility(
+        //   visible: true,
+        //   child: FloatingActionButton.extended(
+        //     onPressed: ()  {
+        //       Navigator.push(
+        //           context,
+        //           MaterialPageRoute(
+        //             builder: (context) =>  classAdd(),
+        //           ));
+        //     },
+        //     backgroundColor: gPrimaryColor,
+        //     foregroundColor: gPrimaryColorDark,
+        //     icon: const Icon(Icons.add),
+        //     label: const Text('Add'),
+        //   ),
+       // ),
       ),
     );
 
@@ -368,10 +370,15 @@ class _routineCard extends State<routineCard> {
                         child: TextButton(
                             child: const Icon(Icons.delete, color: Colors.redAccent,),
                             onPressed: ()  {
-                               delete(course);
-                               setState(() {
 
-                               });
+                              showAlert('Message', '${course.courseName} ${weekDays[course.day]} has been deleted successfully', context);
+                              delete(course);{
+                                setState(() {
+
+                                });
+                              }
+
+
                             }
 
                         ),
@@ -426,14 +433,13 @@ void delete(Classroom cls) {
   final  ref =
   FirebaseFirestore.instance.collection('routines').where('courseName', isEqualTo: cls.courseName)
       .where('startTime', isEqualTo: cls.startTime)
-      .where('endTime', isEqualTo: cls.endTime)
       .where('batch', isEqualTo: cls.batch)
       .where('day', isEqualTo: cls.day).get();
   
   ref.then(
         (snapshot) {
           for(DocumentSnapshot ds in snapshot.docs){
-            print(ds.reference.id);
+            print(ds.reference);
             ds.reference.delete();
           }
 

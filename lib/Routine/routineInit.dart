@@ -35,6 +35,7 @@ class RoutineInit extends StatelessWidget{
           if(Batch == ''){
             return const AlertDialog(title: Text("Please add your information to see routines"), shape: OutlineInputBorder(),);
           }
+          print('on init 1');
           return fun();
         }
         return const Center(
@@ -99,7 +100,7 @@ FutureBuilder fun()
           return const Text('SomeThing Error');
         }
         if(snapshot.hasData && !snapshot.data!.exists){
-          return  RoutineWidget();
+          return  classAdd();
         }
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic>? data = snapshot.data!.data() as Map<String, dynamic>?;
@@ -108,6 +109,7 @@ FutureBuilder fun()
           value.forEach((key, value) {
             attendance[key] = <bool>[value[0], value[1]];
           });
+          print('here on init');
           return RoutineWidget();
         }
         return const Center(
