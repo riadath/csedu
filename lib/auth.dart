@@ -13,6 +13,10 @@ class AuthService {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
+      if (!FirebaseAuth.instance.currentUser!.emailVerified) {
+        FirebaseAuth.instance.signOut();
+        throw Exception('Email Not Verified!');
+      }
       return user;
     } catch (error) {
       return null;

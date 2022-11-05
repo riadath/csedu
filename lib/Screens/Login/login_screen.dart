@@ -1,4 +1,5 @@
 import 'package:csedu/Screens/Home/home_screen.dart';
+import 'package:csedu/Screens/Welcome/welcome_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:csedu/Constants.dart';
@@ -120,7 +121,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SignupScreen(),
+                        builder: (context) => const WelcomeWidget(),
                       ));
                 },
                 child: const Text(
@@ -149,7 +150,8 @@ class LoginScreen extends StatelessWidget {
       body: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
+            if (snapshot.hasData &&
+                FirebaseAuth.instance.currentUser!.emailVerified) {
               return HomeScreen();
             } else {
               return LoginWidget();

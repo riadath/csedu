@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:csedu/Constants.dart';
+import 'package:csedu/Screens/Login/login_screen.dart';
 import 'package:csedu/Screens/Welcome/welcome_screen.dart';
 import 'package:csedu/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -67,7 +68,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
   @override
   Widget build(BuildContext context) {
     return (isVerified)
-        ? const WelcomeScreen()
+        ? const LoginScreen()
         : Scaffold(
             appBar: AppBar(
               title: const Text('Verify Email'),

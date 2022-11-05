@@ -89,7 +89,8 @@ class WelcomeScreen extends StatelessWidget {
       body: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
+            if (snapshot.hasData &&
+                FirebaseAuth.instance.currentUser!.emailVerified) {
               return const HomeScreen();
             } else {
               return const WelcomeWidget();
