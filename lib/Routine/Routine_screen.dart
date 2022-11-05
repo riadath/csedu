@@ -367,10 +367,39 @@ class _routineCard extends State<routineCard> {
                         child: TextButton(
                             child: const Icon(Icons.delete, color: Colors.redAccent,),
                             onPressed: ()  {
-                               delete(course);
-                               setState(() {
-
-                               });
+                              showDialog(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                  title: const Text("Warning!"),
+                                  content: Text('Are you sure you want to delete this class?'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          delete(course);
+                                          Navigator.of(ctx).pop();
+                                        });
+                                      },
+                                      child: Container(
+                                        color: gPrimaryColor,
+                                        padding: const EdgeInsets.all(14),
+                                        child: const Text("YES"),
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(ctx).pop();
+                                        setState(() {});
+                                      },
+                                      child: Container(
+                                        color: gPrimaryColor,
+                                        padding: const EdgeInsets.all(14),
+                                        child: const Text("NO"),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
                             }
 
                         ),

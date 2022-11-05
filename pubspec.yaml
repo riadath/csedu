@@ -51,6 +51,7 @@ dependencies:
   pdf: ^3.8.4
   pull_to_refresh: ^2.0.0
   flutter_native_splash: ^2.2.13
+  flutter_launcher_icons: ^0.10.0
 
 
 
@@ -66,13 +67,12 @@ dev_dependencies:
 
 
 
-#   flutter_launcher_icons: ^0.10.0 
 
 
-# flutter_icons:
-#   android: true
-#   ios: true
-#   image_path: 'images\csedu.png'
+
+flutter_icons:
+  android: true
+  image_path: 'images\graduated.png'
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -97,6 +97,7 @@ flutter:
 flutter_native_splash:
   color: "#f5cb42"
   image: images/learn.png
+  text: "CSEDU Portal"
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

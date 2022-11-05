@@ -25,7 +25,7 @@ class _AlumniProfilePageState extends State<AlumniProfilePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'student profile page',
+      title: 'alumni profile page',
       theme: ThemeData(
         primaryColor: gPrimaryColor,
         primaryColorLight: gPrimaryColor,
@@ -44,7 +44,7 @@ class _AlumniProfilePageState extends State<AlumniProfilePage> {
                   if (tIcon.icon == Icons.search) {
                     tIcon = const Icon(Icons.cancel);
                     searchBar = RoundedInputField(
-                        hintText: 'Search',
+                        hintText: 'Name/Blood Group',
                         icon: Icons.search,
                         onChagned: (value) {
                           setState(() {});
@@ -79,16 +79,17 @@ class _AlumniProfilePageState extends State<AlumniProfilePage> {
           }),
         ),
         floatingActionButton: Visibility(
-          visible: (uid == "9rlStwuDEzPP3wzQjbRNrNDOxte2"),
+          visible: FirebaseAuth.instance.currentUser!.email ==
+              'chowdhuryittehad@gmail.com'
+              ? true
+              : false,
           child: FloatingActionButton.extended(
             onPressed: () {
-              if (uid == "9rlStwuDEzPP3wzQjbRNrNDOxte2") {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const AddAlumniProfile(),
                     ));
-              }
             },
             backgroundColor: gPrimaryColor,
             foregroundColor: gPrimaryColorDark,
@@ -101,11 +102,12 @@ class _AlumniProfilePageState extends State<AlumniProfilePage> {
   }
 
   Stream<List<AlumniModel>> readUsersSearch(String search) {
-    return FirebaseFirestore.instance.collection('alumni').snapshots().map(
+    return FirebaseFirestore.instance.collection('alumni').orderBy('batch').snapshots().map(
         (snapshot) => snapshot.docs
             .map((doc) => AlumniModel.fromJson(doc.data()))
             .where((element) =>
-                element.name.toLowerCase().contains(search.toLowerCase()))
+                element.name.toLowerCase().contains(search.toLowerCase()) ||
+                element.bloodGroup.toLowerCase().contains(search.toLowerCase()))
             .toList());
   }
 
@@ -115,6 +117,7 @@ class _AlumniProfilePageState extends State<AlumniProfilePage> {
         color: Colors.grey[300],
         child: ListTile(
           leading: CircleAvatar(child: Text('${user.batch}')),
+          trailing: CircleAvatar(child: Text('${user.bloodGroup}')),
           title: Text(user.name),
           onTap: () {
             Navigator.push(

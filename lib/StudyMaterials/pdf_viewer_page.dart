@@ -28,6 +28,7 @@ class _pdfviewer extends State<pdfviewer> {
   String str;
   _pdfviewer(this.str);
   Future<ListResult>? futureFiles;
+  Map<int, double> downloadProgress = {};
 
   @override
   void initState() {
@@ -91,14 +92,12 @@ class _pdfviewer extends State<pdfviewer> {
         try {
           await Dio().download(st, savePath,
               onReceiveProgress: (received, total) {
-            if (total != -1) {
-              print((received / total * 100).toStringAsFixed(0) + "%");
-              setState(() {
-                percent = received / total;
-                downloadIndex = index;
-              });
-              //you can build progressbar feature too
-            }
+            double progress = received / total;
+            setState(() {
+              downloadProgress[index] = progress;
+              if (progress == 1) downloadProgress[index] = -1;
+            });
+            //you can build progressbar feature too
           });
           setState(() {
             percent = -1;
@@ -133,6 +132,7 @@ class _pdfviewer extends State<pdfviewer> {
               itemCount: files.length,
               itemBuilder: (context, index) {
                 final file = files[index];
+                double? progress = downloadProgress[index];
                 printUrl(str + file.name);
                 return FirebaseAuth.instance.currentUser!.email ==
                         'chowdhuryittehad@gmail.com'
@@ -193,28 +193,23 @@ class _pdfviewer extends State<pdfviewer> {
                         ),
                         child: ListTile(
                           title: Text(file.name),
-                          subtitle: (percent != -1 && downloadIndex == index)
+                          onTap: ()async {
+                            String st = await printUrl(str + file.name);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MyHomePage(st),
+                                ));
+                          },
+                          subtitle: progress != -1 && progress != null
                               ? LinearProgressIndicator(
-                                  value: percent,
+                                  value: progress,
                                   backgroundColor: Colors.grey,
                                 )
                               : null,
                           trailing: Wrap(
                             spacing: 2,
                             children: <Widget>[
-                              IconButton(
-                                  icon: const Icon(
-                                    Icons.visibility,
-                                    color: Colors.black,
-                                  ),
-                                  onPressed: () async {
-                                    String st = await printUrl(str + file.name);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => MyHomePage(st),
-                                        ));
-                                  }),
                               IconButton(
                                 icon: const Icon(
                                   Icons.download,
@@ -231,28 +226,23 @@ class _pdfviewer extends State<pdfviewer> {
                       )
                     : ListTile(
                         title: Text(file.name),
-                        subtitle: (percent != -1 && downloadIndex == index)
+                        onTap: ()async {
+                          String st = await printUrl(str + file.name);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MyHomePage(st),
+                              ));
+                        },
+                        subtitle: progress != -1 && progress != null
                             ? LinearProgressIndicator(
-                                value: percent,
+                                value: progress,
                                 backgroundColor: Colors.grey,
                               )
                             : null,
                         trailing: Wrap(
                           spacing: 2,
                           children: <Widget>[
-                            IconButton(
-                                icon: const Icon(
-                                  Icons.visibility,
-                                  color: Colors.black,
-                                ),
-                                onPressed: () async {
-                                  String st = await printUrl(str + file.name);
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => MyHomePage(st),
-                                      ));
-                                }),
                             IconButton(
                               icon: const Icon(
                                 Icons.download,

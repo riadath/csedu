@@ -3,7 +3,10 @@ import 'package:csedu/Constants.dart';
 import 'package:csedu/StudentProfiles/show_user_profile.dart';
 import 'package:csedu/rounded_input_field.dart';
 import 'package:csedu/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'add_profile_page.dart';
 
 class StudentProfilePage extends StatefulWidget {
   final int batch;
@@ -43,7 +46,7 @@ class _StudentProfilePageState extends State<StudentProfilePage> {
                   if (tIcon.icon == Icons.search) {
                     tIcon = const Icon(Icons.cancel);
                     searchBar = RoundedInputField(
-                        hintText: 'Search',
+                        hintText: 'Name/Blood Group',
                         icon: Icons.search,
                         onChagned: (value) {
                           setState(() {});
